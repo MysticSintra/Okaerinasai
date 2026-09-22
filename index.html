@@ -46,48 +46,71 @@
   .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
   .prose{max-width:var(--max);}
 
+  /* HEADER LAYOUT */
   header{
     position:sticky;top:0;z-index:50;
-    background:rgba(242,239,230,0.94);
-    backdrop-filter:blur(6px);
+    background:rgba(242,239,230,0.96);
+    backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .nav{
+  
+  /* Top Block: Logo & Language Switcher */
+  .nav-top{
     display:flex;align-items:center;justify-content:space-between;
-    padding:16px 24px;max-width:1040px;margin:0 auto;gap:16px;
+    padding:14px 24px;max-width:1040px;margin:0 auto;
   }
   .brand{
-    font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.25rem;
     letter-spacing:0.01em;white-space:nowrap;
   }
   .brand .jp{font-family:'Noto Sans JP',sans-serif;font-size:0.6em;color:var(--ink-soft);margin-left:8px;font-weight:400;}
-  .nav-right{display:flex;align-items:center;gap:22px;}
-  nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;}
-  nav a{text-decoration:none;font-size:0.92rem;color:var(--ink-soft);}
-  nav a:hover{color:var(--ink);}
-  .nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink);}
+  
+  .nav-top-right{display:flex;align-items:center;gap:16px;}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink);}
 
   .lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex-shrink:0;}
   .lang-btn{
-    background:transparent;border:none;padding:7px 10px;font-size:0.82rem;
+    background:transparent;border:none;padding:6px 10px;font-size:0.82rem;
     cursor:pointer;color:var(--ink-soft);font-family:'IBM Plex Sans',sans-serif;
   }
   .lang-btn.active{background:var(--azulejo);color:var(--paper);}
   .lang-btn:not(.active):hover{background:var(--paper-deep);color:var(--ink);}
 
+  /* Second Block: Navigation Menu (Left to Right) */
+  .nav-bar{
+    border-top:1px solid var(--line);
+    background:var(--paper-deep);
+  }
+  .wrap-nav{
+    max-width:1040px;margin:0 auto;padding:0 24px;
+  }
+  nav ul{
+    list-style:none;display:flex;gap:36px;margin:0;padding:10px 0;
+    align-items:center;
+  }
+  nav a{
+    text-decoration:none;font-size:0.9rem;font-weight:500;
+    color:var(--ink-soft);letter-spacing:0.02em;
+    transition:color 0.15s ease;
+  }
+  nav a:hover{color:var(--azulejo);}
+
   @media (max-width:760px){
+    .nav-bar{position:relative;}
     nav ul{
       display:none;position:absolute;top:100%;left:0;right:0;
       background:var(--paper);border-bottom:1px solid var(--line);
-      flex-direction:column;gap:0;padding:8px 24px 20px;
+      flex-direction:column;gap:0;padding:0 24px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
     }
     nav ul.open{display:flex;}
-    nav li{border-top:1px solid var(--line);}
+    nav li{border-bottom:1px solid var(--line);width:100%;}
+    nav li:last-child{border-bottom:none;}
     nav a{display:block;padding:14px 0;}
     .nav-toggle{display:block;}
-    .nav-right{gap:12px;}
   }
 
+  /* HERO & SECTIONS */
   .hero{padding:64px 0 56px;}
   .route{width:100%;max-width:320px;height:auto;margin-bottom:32px;display:block;}
   .hero h1{font-size:2.3rem;max-width:640px;}
@@ -96,7 +119,7 @@
   .btn{
     display:inline-block;padding:13px 26px;font-size:0.95rem;
     text-decoration:none;border-radius:2px;font-weight:500;
-    border:1px solid var(--ink);
+    border:1px solid var(--ink);cursor:pointer;
   }
   .btn-primary{background:var(--azulejo);border-color:var(--azulejo);color:var(--paper);}
   .btn-primary:hover{background:var(--azulejo-deep);}
@@ -178,10 +201,21 @@
 <body>
 
 <header>
-  <div class="nav">
+  <!-- Top Block: Brand Logo & Language Switcher -->
+  <div class="nav-top">
     <div class="brand">Okaerinasai<span class="jp">お帰りなさい</span></div>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">☰</button>
-    <div class="nav-right">
+    <div class="nav-top-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en" onclick="applyLang('en')">EN</button>
+        <button class="lang-btn" data-lang="ja" onclick="applyLang('ja')">日本語</button>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+
+  <!-- Second Block: Navigation Menu (Left to Right) -->
+  <div class="nav-bar">
+    <nav class="wrap-nav">
       <ul id="navlist">
         <li><a href="#services" data-i18n="nav.services">Services</a></li>
         <li><a href="#process" data-i18n="nav.process">Process</a></li>
@@ -189,11 +223,7 @@
         <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
-      <div class="lang-switch">
-        <button class="lang-btn active" data-lang="en" onclick="applyLang('en')">EN</button>
-        <button class="lang-btn" data-lang="ja" onclick="applyLang('ja')">日本語</button>
-      </div>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -384,14 +414,14 @@
       <h2 data-i18n="contact.h2">Book your free consultation.</h2>
       <p data-i18n="contact.p">Tell us a little about your business and goals. We'll reply within two business days to schedule a call.</p>
     </div>
-    <form>
+    <form id="consultation-form">
       <div>
         <label for="name" data-i18n="label.name">Name</label>
-        <input type="text" id="name" data-i18n-placeholder="name.placeholder" placeholder="Your name">
+        <input type="text" id="name" required data-i18n-placeholder="name.placeholder" placeholder="Your name">
       </div>
       <div>
         <label for="email" data-i18n="label.email">Email</label>
-        <input type="email" id="email" placeholder="you@example.com">
+        <input type="email" id="email" required placeholder="you@example.com">
       </div>
       <div>
         <label for="business" data-i18n="label.business">What kind of business are you planning?</label>
@@ -531,6 +561,13 @@ function applyLang(lang){
   });
   document.getElementById('navlist').classList.remove('open');
 }
+
+// Auto-close mobile navigation when a section link is tapped
+document.querySelectorAll('#navlist a').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navlist').classList.remove('open');
+  });
+});
 </script>
 
 </body>
