@@ -414,22 +414,22 @@
       <h2 data-i18n="contact.h2">Book your free consultation.</h2>
       <p data-i18n="contact.p">Tell us a little about your business and goals. We'll reply within two business days to schedule a call.</p>
     </div>
-    <form id="consultation-form">
+    <form id="consultation-form" action="https://formspree.io/f/xzezrylk" method="POST">
       <div>
         <label for="name" data-i18n="label.name">Name</label>
-        <input type="text" id="name" required data-i18n-placeholder="name.placeholder" placeholder="Your name">
+        <input type="text" id="name" name="name" required data-i18n-placeholder="name.placeholder" placeholder="Your name">
       </div>
       <div>
         <label for="email" data-i18n="label.email">Email</label>
-        <input type="email" id="email" required placeholder="you@example.com">
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
       </div>
       <div>
         <label for="business" data-i18n="label.business">What kind of business are you planning?</label>
-        <input type="text" id="business" data-i18n-placeholder="business.placeholder" placeholder="e.g. e-commerce, consulting, restaurant">
+        <input type="text" id="business" name="business" data-i18n-placeholder="business.placeholder" placeholder="e.g. e-commerce, consulting, restaurant">
       </div>
       <div>
         <label for="timeline" data-i18n="label.timeline">When are you hoping to move?</label>
-        <select id="timeline">
+        <select id="timeline" name="timeline">
           <option data-i18n="opt1">Within 6 months</option>
           <option data-i18n="opt2">6–12 months</option>
           <option data-i18n="opt3">Just exploring</option>
@@ -437,13 +437,14 @@
       </div>
       <div>
         <label for="message" data-i18n="label.message">Anything else we should know?</label>
-        <textarea id="message" rows="3" data-i18n-placeholder="message.placeholder" placeholder="Optional"></textarea>
+        <textarea id="message" rows="3" name="message" data-i18n-placeholder="message.placeholder" placeholder="Optional"></textarea>
       </div>
       <label class="consent">
-        <input type="checkbox" id="consent" required>
+        <input type="checkbox" id="consent" name="gdpr_consent" required>
         <span data-i18n="label.consent">Information you submit is stored only to respond to your enquiry and is never shared with third parties.</span>
       </label>
-      <button type="submit" class="btn btn-primary" data-i18n="btn.submit">Request a consultation</button>
+      <button type="submit" id="submit-btn" class="btn btn-primary" data-i18n="btn.submit">Request a consultation</button>
+      <div id="form-status" style="margin-top:12px; font-size:0.9rem; color:#8FB4DA;"></div>
     </form>
   </div>
 </section>
@@ -567,6 +568,46 @@ document.querySelectorAll('#navlist a').forEach(function(link){
   link.addEventListener('click', function(){
     document.getElementById('navlist').classList.remove('open');
   });
+});
+
+// AJAX Form Submission for Formspree
+const form = document.getElementById("consultation-form");
+const status = document.getElementById("form-status");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const data = new FormData(form);
+  const currentLang = document.documentElement.lang || 'en';
+  
+  status.textContent = currentLang === 'ja' ? "送信中..." : "Sending...";
+  
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      status.textContent = currentLang === 'ja' 
+        ? "送信が完了しました。2営業日以内にご連絡いたします。" 
+        : "Thank you! Your request has been sent. We'll reply within two business days.";
+      form.reset();
+    } else {
+      const errorData = await response.json();
+      if (Object.hasOwn(errorData, 'errors')) {
+        status.textContent = errorData["errors"].map(error => error["message"]).join(", ");
+      } else {
+        status.textContent = currentLang === 'ja' 
+          ? "送信エラーが発生しました。再度お試しくかださい。" 
+          : "Oops! There was a problem submitting your form.";
+      }
+    }
+  } catch (error) {
+    status.textContent = currentLang === 'ja' 
+      ? "通信エラーが発生しました。時間を置いて再度お試しください。" 
+      : "Oops! Network error. Please try again later.";
+  }
 });
 </script>
 
