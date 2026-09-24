@@ -154,12 +154,8 @@
   .step-num{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--hanko);}
   .journey-item h3{font-size:1.3rem;margin-bottom:6px;}
   .journey-item .tagline{color:var(--ink-soft);font-style:italic;margin-bottom:16px;}
-  .journey-item ul{margin:0 0 18px 0;padding-left:20px;color:var(--ink-soft);}
+  .journey-item ul{margin:0;padding-left:20px;color:var(--ink-soft);}
   .journey-item li{margin-bottom:6px;}
-  .price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
-  .price{font-family:'Fraunces',serif;font-size:1.25rem;color:var(--ink);}
-  html[lang="ja"] .price{font-family:inherit;font-weight:600;}
-  .price-note{color:var(--ink-soft);font-size:0.86rem;}
   @media (max-width:600px){.journey-item{grid-template-columns:1fr;gap:8px;}}
 
   .process-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;}
@@ -295,10 +291,6 @@
             <li data-i18n="package1.li3">Full business plan built to Portuguese immigration requirements</li>
             <li data-i18n="package1.li4">Clear comparison of your visa options</li>
           </ul>
-          <div class="price-row">
-            <span class="price" data-i18n="package1.price">From €2,500</span>
-            <span class="price-note" data-i18n="package1.note">Delivered in 2–3 weeks</span>
-          </div>
         </div>
       </div>
 
@@ -314,10 +306,6 @@
             <li data-i18n="package2.li4">D2 visa application, prepared and filed by our partner lawyer</li>
             <li data-i18n="package2.li5">Support through every step until your visa decision</li>
           </ul>
-          <div class="price-row">
-            <span class="price" data-i18n="package2.price">From €6,000</span>
-            <span class="price-note" data-i18n="package2.note">Government and legal fees billed separately · 4–8 months</span>
-          </div>
         </div>
       </div>
 
@@ -333,10 +321,6 @@
             <li data-i18n="package3.li4">Visa renewal preparation</li>
             <li data-i18n="package3.li5">Help with day-to-day business and admin questions</li>
           </ul>
-          <div class="price-row">
-            <span class="price" data-i18n="package3.price">From €1000/month</span>
-            <span class="price-note" data-i18n="package3.note">12-month minimum</span>
-          </div>
         </div>
       </div>
     </div>
@@ -476,15 +460,13 @@ const translations = {
     "package1.title":"事業性評価・事業計画書作成","package1.tagline":"本格的に取り組む前に、ポルトガルでの事業の実現性を確認します。",
     "package1.li1":"チームとの個別相談","package1.li2":"市場・業種の実現可能性評価",
     "package1.li3":"ポルトガルの移民要件に沿った事業計画書の作成","package1.li4":"ビザ選択肢の明確な比較",
-    "package1.price":"€2,500〜","package1.note":"納期:2〜3週間",
     "package2.title":"会社設立・D2ビザ申請フルサポート","package2.tagline":"事業設立からポルトガル移住まで、必要な手続きをすべて代行します。",
     "package2.li1":"「事業性評価・事業計画書作成」の内容をすべて含む","package2.li2":"ポルトガルでの会社登記",
     "package2.li3":"銀行口座開設・税務登録","package2.li4":"提携弁護士によるD2ビザ申請の作成・提出",
-    "package2.li5":"ビザ結果が出るまでの全過程をサポート","package2.price":"€6,000〜","package2.note":"行政・弁護士費用は別途 · 期間:4〜8ヶ月",
+    "package2.li5":"ビザ結果が出るまでの全過程をサポート",
     "package3.title":"初年度サポート","package3.tagline":"手続き完了後も、継続的なサポートで安心の定住を。",
     "package3.li1":"「会社設立・D2ビザ申請フルサポート」の内容をすべて含む","package3.li2":"専任担当者との月次面談",
     "package3.li3":"提携会計士との記帳業務の調整","package3.li4":"ビザ更新の準備","package3.li5":"日常の事業・事務に関するご相談対応",
-    "package3.price":"月額€1000〜","package3.note":"最低契約期間:12ヶ月",
     "process.kicker":"ご利用の流れ","process.h2":"初回のご相談から定住まで、明確な道筋を。",
     "p1.title":"ご相談。","p1.text":"専任担当者との無料相談で、事業内容とご希望を伺います。",
     "p2.title":"計画・申請。","p2.text":"事業計画書と申請書類を作成し、弁護士が法的手続きを確認します。",
@@ -520,16 +502,14 @@ const translations = {
     "package1.title":"Business Feasibility & Plan","package1.tagline":"Find out if your business is ready for Portugal, before you commit to anything.",
     "package1.li1":"One-on-one consultation with our team","package1.li2":"Market and sector viability assessment",
     "package1.li3":"Full business plan built to Portuguese immigration requirements","package1.li4":"Clear comparison of your visa options",
-    "package1.price":"From €2,500","package1.note":"Delivered in 2–3 weeks",
     "package2.title":"Full Company Setup & D2 Visa","package2.tagline":"Everything you need to open your business and move to Portugal, managed end to end.",
     "package2.li1":"Everything in Business Feasibility & Plan","package2.li2":"Company registration in Portugal",
     "package2.li3":"Bank account and tax setup","package2.li4":"D2 visa application, prepared and filed by our partner lawyer",
-    "package2.li5":"Support through every step until your visa decision","package2.price":"From €6,000",
-    "package2.note":"Government and legal fees billed separately · 4–8 months",
+    "package2.li5":"Support through every step until your visa decision",
     "package3.title":"First-Year Support","package3.tagline":"Get settled with ongoing help, not just a one-time filing.",
     "package3.li1":"Everything in Full Company Setup & D2 Visa","package3.li2":"Monthly check-ins with your dedicated contact",
     "package3.li3":"Bookkeeping coordination with our accounting partner","package3.li4":"Visa renewal preparation",
-    "package3.li5":"Help with day-to-day business and admin questions","package3.price":"From €1000/month","package3.note":"12-month minimum",
+    "package3.li5":"Help with day-to-day business and admin questions",
     "process.kicker":"How it works","process.h2":"A clear path from first call to settled in Portugal.",
     "p1.title":"Consultation.","p1.text":"A free call with your dedicated contact to understand your business and goals.",
     "p2.title":"Plan & filing.","p2.text":"We build your business plan and application, with our lawyer reviewing every legal step.",
