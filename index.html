@@ -1,725 +1,620 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Okaerinasai – Strategic Gateway to Portugal for Japanese Business</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okaerinasai — Start your business in Portugal</title>
+
+<!-- Favicon & Device Icons -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#1E4470">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Serif+JP:wght@500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6;
+    --paper-deep:#EAE5D6;
+    --ink:#1B1B1F;
+    --ink-soft:#4A4A47;
+    --azulejo:#1E4470;
+    --azulejo-deep:#15304F;
+    --hanko:#A63A2E;
+    --line:#CFC7B2;
+    --max:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:17px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  html[lang="ja"] body{font-family:'Noto Sans JP',sans-serif;}
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    color:var(--ink);
+    margin:0;
+    line-height:1.2;
+  }
+  html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] h3{font-family:'Noto Serif JP',serif;}
+
+  p{margin:0 0 1em 0;}
+  a{color:inherit;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  .prose{max-width:var(--max);}
+
+  /* HEADER LAYOUT */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,239,230,0.96);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
   
-  <!-- Favicon & Device Icons -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#1E4470">
+  /* Top Block: Logo & Language Switcher */
+  .nav-top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:1040px;margin:0 auto;
+  }
+  .brand{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.25rem;
+    letter-spacing:0.01em;white-space:nowrap;
+  }
+  .brand .jp{font-family:'Noto Sans JP',sans-serif;font-size:0.6em;color:var(--ink-soft);margin-left:8px;font-weight:400;}
+  
+  .nav-top-right{display:flex;align-items:center;gap:16px;}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink);}
 
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  .lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex-shrink:0;}
+  .lang-btn{
+    background:transparent;border:none;padding:6px 10px;font-size:0.82rem;
+    cursor:pointer;color:var(--ink-soft);font-family:'IBM Plex Sans',sans-serif;
+  }
+  .lang-btn.active{background:var(--azulejo);color:var(--paper);}
+  .lang-btn:not(.active):hover{background:var(--paper-deep);color:var(--ink);}
 
-  <style>
-    :root {
-      --bg-paper: #FAF8F5;
-      --bg-white: #FFFFFF;
-      --text-main: #1C2024;
-      --text-muted: #57606A;
-      --azulejo-blue: #1E4470;
-      --azulejo-light: #EBF1F7;
-      --hanko-red: #A63A2E;
-      --gold-accent: #C5A059;
-      --border-color: #E2E8F0;
-      --radius-md: 12px;
-      --shadow-subtle: 0 4px 20px rgba(0,0,0,0.06);
+  /* Second Block: Navigation Menu (Left to Right) */
+  .nav-bar{
+    border-top:1px solid var(--line);
+    background:var(--paper-deep);
+  }
+  .wrap-nav{
+    max-width:1040px;margin:0 auto;padding:0 24px;
+  }
+  nav ul{
+    list-style:none;display:flex;gap:36px;margin:0;padding:10px 0;
+    align-items:center;
+  }
+  nav a{
+    text-decoration:none;font-size:0.9rem;font-weight:500;
+    color:var(--ink-soft);letter-spacing:0.02em;
+    transition:color 0.15s ease;
+  }
+  nav a:hover{color:var(--azulejo);}
+
+  @media (max-width:760px){
+    .nav-bar{position:relative;}
+    nav ul{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:var(--paper);border-bottom:1px solid var(--line);
+      flex-direction:column;gap:0;padding:0 24px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
     }
+    nav ul.open{display:flex;}
+    nav li{border-bottom:1px solid var(--line);width:100%;}
+    nav li:last-child{border-bottom:none;}
+    nav a{display:block;padding:14px 0;}
+    .nav-toggle{display:block;}
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* HERO & SECTIONS */
+  .hero{padding:64px 0 56px;}
+  .route{width:100%;max-width:320px;height:auto;margin-bottom:32px;display:block;}
+  .hero h1{font-size:2.3rem;max-width:640px;}
+  .hero .lead{font-size:1.1rem;color:var(--ink-soft);max-width:520px;margin-top:18px;}
+  .cta-row{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 26px;font-size:0.95rem;
+    text-decoration:none;border-radius:2px;font-weight:500;
+    border:1px solid var(--ink);cursor:pointer;
+  }
+  .btn-primary{background:var(--azulejo);border-color:var(--azulejo);color:var(--paper);}
+  .btn-primary:hover{background:var(--azulejo-deep);}
+  .btn-ghost{background:transparent;color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-deep);}
 
-    body {
-      font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
-      background-color: var(--bg-paper);
-      color: var(--text-main);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+  .divider{display:flex;align-items:center;gap:14px;margin:0 auto;max-width:1040px;padding:0 24px;}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .divider .dot{width:6px;height:6px;border-radius:50%;background:var(--hanko);flex-shrink:0;}
 
-    h1, h2, h3, .serif-text { font-family: 'Cinzel', serif; }
-    .jp-font { font-family: 'Noto Sans JP', sans-serif; }
+  section{padding:56px 0;}
+  .section-head{max-width:560px;margin-bottom:36px;}
+  .section-head .kicker{color:var(--azulejo);font-size:0.85rem;margin-bottom:10px;display:block;}
+  .section-head h2{font-size:1.75rem;}
+  .section-head p{color:var(--ink-soft);margin-top:14px;}
 
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  .fact{padding:24px 20px 24px 0;border-bottom:1px solid var(--line);}
+  .fact + .fact{border-left:1px solid var(--line);padding-left:20px;}
+  .fact .num{font-family:'Fraunces',serif;font-size:2rem;color:var(--azulejo);}
+  .fact .label{color:var(--ink-soft);font-size:0.9rem;margin-top:6px;}
+  @media (max-width:680px){
+    .facts{grid-template-columns:1fr;}
+    .fact + .fact{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:20px;}
+  }
 
-    /* Header Block */
-    header {
-      background-color: rgba(250, 248, 245, 0.95);
-      backdrop-filter: blur(8px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid var(--border-color);
-    }
+  .journey-item{
+    display:grid;grid-template-columns:56px 1fr;gap:22px;
+    padding:32px 0;border-top:1px solid var(--line);
+  }
+  .journey-item:last-child{border-bottom:1px solid var(--line);}
+  .step-num{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--hanko);}
+  .journey-item h3{font-size:1.3rem;margin-bottom:6px;}
+  .journey-item .tagline{color:var(--ink-soft);font-style:italic;margin-bottom:16px;}
+  .journey-item ul{margin:0;padding-left:20px;color:var(--ink-soft);}
+  .journey-item li{margin-bottom:6px;}
+  @media (max-width:600px){.journey-item{grid-template-columns:1fr;gap:8px;}}
 
-    /* Top Header Row */
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px dashed var(--border-color);
-    }
+  .process-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;}
+  .process-grid .p-item{border-left:2px solid var(--azulejo);padding-left:18px;}
+  .process-grid .p-item .num{color:var(--azulejo);font-family:'Fraunces',serif;font-size:1.05rem;}
+  @media (max-width:720px){.process-grid{grid-template-columns:1fr;}}
 
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--azulejo-blue);
-    }
+  .trust-box{background:var(--paper-deep);border:1px solid var(--line);padding:30px;max-width:var(--max);}
+  .trust-box p{color:var(--ink-soft);margin:0;}
 
-    .hanko-stamp {
-      width: 40px;
-      height: 40px;
-      background: var(--hanko-red);
-      color: white;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 20px;
-      box-shadow: 0 2px 8px rgba(166, 58, 46, 0.25);
-    }
+  .faq-item{border-top:1px solid var(--line);padding:20px 0;max-width:var(--max);}
+  .faq-item h3{font-size:1.02rem;font-weight:600;font-family:'IBM Plex Sans',sans-serif;margin-bottom:8px;}
+  html[lang="ja"] .faq-item h3{font-family:'Noto Sans JP',sans-serif;}
+  .faq-item p{color:var(--ink-soft);margin:0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
 
-    .brand-title {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
+  .contact{background:var(--azulejo-deep);color:var(--paper);}
+  .contact .section-head h2{color:var(--paper);}
+  .contact .section-head p{color:#C9D6E4;}
+  .contact .section-head .kicker{color:#8FB4DA;}
+  form{display:grid;gap:16px;max-width:520px;}
+  label{font-size:0.86rem;color:#C9D6E4;display:block;margin-bottom:6px;}
+  .label-row{display:flex;justify-content:space-between;align-items:baseline;}
+  .char-count{font-size:0.78rem;color:#7E9BBB;}
+  input,select,textarea{
+    width:100%;padding:12px 14px;border:1px solid #3C5F85;
+    background:#1A3859;color:var(--paper);font-family:inherit;font-size:0.95rem;
+    border-radius:2px;
+  }
+  input::placeholder,textarea::placeholder{color:#7E9BBB;}
+  form .btn-primary{background:var(--hanko);border-color:var(--hanko);justify-self:start;margin-top:6px;}
+  form .btn-primary:hover{background:#8A2F25;}
+  .consent{font-size:0.8rem;color:#A9C0D8;display:flex;gap:8px;align-items:flex-start;}
+  .consent input{width:auto;margin-top:3px;}
 
-    .brand-sub {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    /* Language Controls */
-    .lang-switcher {
-      display: flex;
-      background: var(--azulejo-light);
-      padding: 3px;
-      border-radius: 20px;
-      border: 1px solid rgba(30, 68, 112, 0.12);
-    }
-
-    .lang-btn {
-      border: none;
-      background: transparent;
-      padding: 6px 14px;
-      border-radius: 16px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      color: var(--text-muted);
-      transition: all 0.2s ease;
-    }
-
-    .lang-btn.active {
-      background: var(--azulejo-blue);
-      color: white;
-      box-shadow: 0 2px 6px rgba(30, 68, 112, 0.25);
-    }
-
-    /* Second Nav Block */
-    .header-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 500;
-      font-size: 14px;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover { color: var(--azulejo-blue); }
-
-    .btn-header {
-      background: var(--azulejo-blue);
-      color: white;
-      padding: 8px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      transition: background 0.2s ease;
-    }
-
-    .btn-header:hover { background: #153254; }
-
-    /* Hero */
-    .hero {
-      padding: 80px 0 60px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--azulejo-light);
-      color: var(--azulejo-blue);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      line-height: 1.25;
-      color: var(--azulejo-blue);
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 17px;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-    }
-
-    .hero-box {
-      background: var(--bg-white);
-      padding: 32px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .hero-box h3 {
-      color: var(--azulejo-blue);
-      margin-bottom: 16px;
-      font-size: 20px;
-    }
-
-    .hero-box ul {
-      list-style: none;
-    }
-
-    .hero-box li {
-      margin-bottom: 12px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-    }
-
-    .hero-box li i { color: var(--gold-accent); margin-top: 3px; flex-shrink: 0; }
-
-    /* Services Section */
-    .services {
-      padding: 80px 0;
-      background: var(--bg-white);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .section-title {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 48px;
-    }
-
-    .section-title h2 {
-      font-size: 34px;
-      color: var(--azulejo-blue);
-      margin-bottom: 12px;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 15px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .service-card {
-      background: var(--bg-paper);
-      border-radius: var(--radius-md);
-      padding: 32px;
-      border: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-subtle);
-      border-color: var(--azulejo-blue);
-    }
-
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--azulejo-light);
-      color: var(--azulejo-blue);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .service-card h3 {
-      font-size: 20px;
-      color: var(--azulejo-blue);
-      margin-bottom: 12px;
-    }
-
-    .service-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .service-card ul {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    .service-card li {
-      font-size: 13px;
-      margin-bottom: 8px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .service-card li i { color: var(--azulejo-blue); flex-shrink: 0; }
-
-    /* Contact Section */
-    .contact-section {
-      padding: 80px 0;
-    }
-
-    .form-container {
-      max-width: 680px;
-      margin: 0 auto;
-      background: var(--bg-white);
-      padding: 40px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 14px;
-      background: var(--bg-paper);
-      font-family: inherit;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--azulejo-blue);
-      background: white;
-    }
-
-    .char-count {
-      text-align: right;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: var(--azulejo-blue);
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 6px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .btn-submit:hover { background: #153254; }
-
-    /* Footer */
-    footer {
-      background: var(--azulejo-blue);
-      color: white;
-      padding: 60px 0 30px;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
-      margin-top: 12px;
-      max-width: 360px;
-    }
-
-    .footer-legal {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 24px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
-      .footer-content { grid-template-columns: 1fr; }
-    }
-  </style>
+  footer{padding:32px 0;border-top:1px solid var(--line);}
+  footer .disclaimer{color:var(--ink-soft);font-size:0.83rem;max-width:680px;}
+  footer .copy{color:var(--ink-soft);font-size:0.83rem;margin-top:18px;}
+</style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="header-top">
-        <a href="#" class="brand-logo">
-          <div class="hanko-stamp">帰</div>
-          <div>
-            <div class="brand-title">OKAERINASAI</div>
-            <div class="brand-sub">PORTUGAL ENTRY PARTNER</div>
-          </div>
-        </a>
-        <div class="lang-switcher">
-          <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
-          <button class="lang-btn" id="btn-ja" onclick="setLanguage('ja')">日本語</button>
-        </div>
+<header>
+  <!-- Top Block: Brand Logo & Language Switcher -->
+  <div class="nav-top">
+    <div class="brand">Okaerinasai<span class="jp">お帰りなさい</span></div>
+    <div class="nav-top-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en" onclick="applyLang('en')">EN</button>
+        <button class="lang-btn" data-lang="ja" onclick="applyLang('ja')">日本語</button>
       </div>
-
-      <div class="header-nav">
-        <ul class="nav-links">
-          <li><a href="#services" id="nav-services">Services</a></li>
-          <li><a href="#about" id="nav-about">About Us</a></li>
-          <li><a href="#contact" id="nav-contact">Contact</a></li>
-        </ul>
-        <a href="#contact" class="btn-header" id="nav-cta">Book Consultation</a>
-      </div>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">☰</button>
     </div>
-  </header>
+  </div>
 
-  <!-- Hero Section -->
-  <section class="container hero">
-    <div>
-      <div class="hero-badge">
-        <i data-lucide="shield-check" style="width: 16px;"></i>
-        <span id="hero-tag">Bilingual Market Entry & Strategic Advisory</span>
-      </div>
-      <h1 id="hero-title">Expand Your Business & Life to Portugal with Confidence</h1>
-      <p id="hero-desc">We bridge Japanese corporations, entrepreneurs, and investors with licensed Portuguese partners, delivering seamless relocation and business creation in the EU.</p>
-      <a href="#contact" class="btn-header" style="padding: 12px 28px; font-size: 15px;" id="hero-cta">Start Discussion</a>
-    </div>
-
-    <div class="hero-box">
-      <h3 id="card-title">Why Portugal for Japanese Business?</h3>
-      <ul>
-        <li><i data-lucide="check-circle-2"></i> <span id="card-p1">Strategic Gateway to European & Portuguese-speaking markets (CPLP).</span></li>
-        <li><i data-lucide="check-circle-2"></i> <span id="card-p2">Attractive D2 Entrepreneurial Visa route with clear business plan requirements.</span></li>
-        <li><i data-lucide="check-circle-2"></i> <span id="card-p3">Safe, business-friendly environment with skilled European talent.</span></li>
+  <!-- Second Block: Navigation Menu (Left to Right) -->
+  <div class="nav-bar">
+    <nav class="wrap-nav">
+      <ul id="navlist">
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#process" data-i18n="nav.process">Process</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <svg class="route" viewBox="0 0 340 90" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,70 C 100,10 240,10 320,70" fill="none" stroke="#1E4470" stroke-width="1.5"/>
+      <circle cx="20" cy="70" r="5" fill="#A63A2E"/>
+      <circle cx="320" cy="70" r="5" fill="#1E4470"/>
+      <text x="20" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Japan</text>
+      <text x="320" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Portugal</text>
+    </svg>
+    <h1 data-i18n="hero.h1">Start your business in Portugal, guided by people who know both worlds.</h1>
+    <p class="lead" data-i18n="hero.lead">We help entrepreneurs open a company, secure a D2 visa, and settle in Portugal — with a Japanese-speaking team and licensed Portuguese partners handling every step.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary" data-i18n="hero.ctaPrimary">Book a free consultation</a>
+      <a href="#services" class="btn btn-ghost" data-i18n="hero.ctaGhost">See our services</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Services Section -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-title">
-        <h2 id="services-title">Tailored Entry Packages</h2>
-        <p id="services-desc">Structured advisory services designed to satisfy Japanese corporate risk standards and Portuguese administrative compliance.</p>
+<div class="divider"><span class="dot"></span></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="about.kicker">Why Portugal, why now</span>
+      <h2 data-i18n="about.h2">An EU foothold, without an investment minimum.</h2>
+      <p data-i18n="about.p">The D2 visa lets entrepreneurs and the self-employed open a business in Portugal and apply for residency — no fixed capital requirement, no job-creation quota. What matters is a credible, well-built business plan.</p>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <div class="num">€0</div>
+        <div class="label" data-i18n="fact1.label">Fixed investment minimum for the D2 route</div>
       </div>
-
-      <div class="services-grid">
-        <!-- Card 1 -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon"><i data-lucide="rocket"></i></div>
-            <h3 id="p1-title">Market Landing</h3>
-            <p id="p1-desc">Designed for individual entrepreneurs and small business founders initiating operations in Portugal.</p>
-            <ul>
-              <li><i data-lucide="check"></i> <span id="p1-f1">Business entity recommendation</span></li>
-              <li><i data-lucide="check"></i> <span id="p1-f2">NIF (Tax ID) & Bank Account setup</span></li>
-              <li><i data-lucide="check"></i> <span id="p1-f3">D2 Entrepreneur Visa orientation</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon"><i data-lucide="building-2"></i></div>
-            <h3 id="p2-title">Corporate Branch</h3>
-            <p id="p2-desc">Complete company establishment and ongoing compliance support for corporate expansions.</p>
-            <ul>
-              <li><i data-lucide="check"></i> <span id="p2-f1">Subsidiary / Branch Registration</span></li>
-              <li><i data-lucide="check"></i> <span id="p2-f2">Local tax & accounting coordination</span></li>
-              <li><i data-lucide="check"></i> <span id="p2-f3">Virtual & physical office sourcing</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon"><i data-lucide="compass"></i></div>
-            <h3 id="p3-title">Executive Relocation</h3>
-            <p id="p3-desc">Dedicated concierge and administrative assistance for executives and families settling in Portugal.</p>
-            <ul>
-              <li><i data-lucide="check"></i> <span id="p3-f1">Residential property sourcing & lease review</span></li>
-              <li><i data-lucide="check"></i> <span id="p3-f2">Schooling & healthcare orientation</span></li>
-              <li><i data-lucide="check"></i> <span id="p3-f3">Bilingual administrative support</span></li>
-            </ul>
-          </div>
-        </div>
+      <div class="fact">
+        <div class="num">EU</div>
+        <div class="label" data-i18n="fact2.label">Market access and freedom of movement within the Schengen area</div>
+      </div>
+      <div class="fact">
+        <div class="num">10yr</div>
+        <div class="label" data-i18n="fact3.label">Path to citizenship under current Portuguese law</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contact Form Section -->
-  <section class="contact-section" id="contact">
-    <div class="container">
-      <div class="form-container">
-        <h2 class="serif-text" style="color: var(--azulejo-blue); text-align: center; margin-bottom: 8px;" id="form-title">Consultation Request</h2>
-        <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 28px;" id="form-sub">Speak with our Japanese-fluent coordination team.</p>
+<div class="divider"><span class="dot"></span></div>
 
-        <form action="https://formspree.io/f/xzezrylk" method="POST">
-          <div class="form-group">
-            <label id="lbl-name">Full Name / お名前</label>
-            <input type="text" name="name" class="form-control" required placeholder="Taro Yamada">
-          </div>
-
-          <div class="form-group">
-            <label id="lbl-email">Email / メールアドレス</label>
-            <input type="email" name="email" class="form-control" required placeholder="name@company.com">
-          </div>
-
-          <div class="form-group">
-            <label id="lbl-service">Interested Service / ご希望のサービス</label>
-            <select name="service" class="form-control">
-              <option id="opt-1">Market Landing Package</option>
-              <option id="opt-2">Corporate Branch Package</option>
-              <option id="opt-3">Executive Relocation</option>
-              <option id="opt-4">General Inquiry</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label id="lbl-msg">Message / お問い合わせ内容</label>
-            <textarea name="message" id="message-field" class="form-control" rows="4" maxlength="500" required placeholder="Please outline your plans or questions..."></textarea>
-            <div class="char-count"><span id="char-num">0</span> / 500</div>
-          </div>
-
-          <div class="form-group" style="display: flex; gap: 8px; align-items: flex-start;">
-            <input type="checkbox" required id="gdpr-check" style="margin-top: 4px;">
-            <label for="gdpr-check" style="font-size: 12px; color: var(--text-muted); font-weight: 400;" id="gdpr-label">I consent to Okaerinasai processing my details to reply to this inquiry in accordance with GDPR regulations.</label>
-          </div>
-
-          <button type="submit" class="btn-submit" id="btn-submit">Send Consultation Request</button>
-        </form>
-      </div>
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="services.kicker">Services</span>
+      <h2 data-i18n="services.h2">Three stages, one team.</h2>
+      <p data-i18n="services.p">Work with us for a single stage, or start to finish. Every stage includes your dedicated relationship manager and our licensed Portuguese legal and accounting partners.</p>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
+    <div class="journey">
+      <div class="journey-item">
+        <div class="step-num">01</div>
         <div>
-          <div class="brand-logo" style="color: white;">
-            <div class="hanko-stamp">帰</div>
-            <div class="brand-title">OKAERINASAI</div>
-          </div>
-          <p class="footer-desc" id="ft-desc">Empowering Japanese entities and founders to successfully navigate Portuguese business expansion.</p>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 12px;" id="ft-head-nav">Navigation</h4>
-          <p><a href="#services" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px;">Services</a></p>
-          <p><a href="#contact" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px;">Contact</a></p>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 12px;" id="ft-head-contact">Office</h4>
-          <p style="font-size: 13px; color: rgba(255,255,255,0.8);">
-            Lisbon, Portugal<br>
-            contact@okaerinasai.eu
-          </p>
+          <h3 data-i18n="package1.title">Business Feasibility &amp; Plan</h3>
+          <p class="tagline" data-i18n="package1.tagline">Find out if your business is ready for Portugal, before you commit to anything.</p>
+          <ul>
+            <li data-i18n="package1.li1">One-on-one consultation with our team</li>
+            <li data-i18n="package1.li2">Market and sector viability assessment</li>
+            <li data-i18n="package1.li3">Full business plan built to Portuguese immigration requirements</li>
+            <li data-i18n="package1.li4">Clear comparison of your visa options</li>
+          </ul>
         </div>
       </div>
 
-      <div class="footer-legal">
-        <p>&copy; 2026 Okaerinasai.eu. All rights reserved.</p>
-        <p id="ft-disclaimer" style="margin-top: 6px;">Okaerinasai is an independent corporate advisory and relocation agency in Portugal. All legal, immigration, and accounting advisory services are conducted directly through our network of licensed Portuguese lawyers and certified public accountants.</p>
+      <div class="journey-item">
+        <div class="step-num">02</div>
+        <div>
+          <h3 data-i18n="package2.title">Full Company Setup &amp; D2 Visa</h3>
+          <p class="tagline" data-i18n="package2.tagline">Everything you need to open your business and move to Portugal, managed end to end.</p>
+          <ul>
+            <li data-i18n="package2.li1">Everything in Business Feasibility &amp; Plan</li>
+            <li data-i18n="package2.li2">Company registration in Portugal</li>
+            <li data-i18n="package2.li3">Bank account and tax setup</li>
+            <li data-i18n="package2.li4">D2 visa application, prepared and filed by our partner lawyer</li>
+            <li data-i18n="package2.li5">Support through every step until your visa decision</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="journey-item">
+        <div class="step-num">03</div>
+        <div>
+          <h3 data-i18n="package3.title">First-Year Support</h3>
+          <p class="tagline" data-i18n="package3.tagline">Get settled with ongoing help, not just a one-time filing.</p>
+          <ul>
+            <li data-i18n="package3.li1">Everything in Full Company Setup &amp; D2 Visa</li>
+            <li data-i18n="package3.li2">Monthly check-ins with your dedicated contact</li>
+            <li data-i18n="package3.li3">Bookkeeping coordination with our accounting partner</li>
+            <li data-i18n="package3.li4">Visa renewal preparation</li>
+            <li data-i18n="package3.li5">Help with day-to-day business and admin questions</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- Scripts -->
-  <script>
-    // Dictionary
-    const dict = {
-      en: {
-        "nav-services": "Services",
-        "nav-about": "About Us",
-        "nav-contact": "Contact",
-        "nav-cta": "Book Consultation",
-        "hero-tag": "Bilingual Market Entry & Strategic Advisory",
-        "hero-title": "Expand Your Business & Life to Portugal with Confidence",
-        "hero-desc": "We bridge Japanese corporations, entrepreneurs, and investors with licensed Portuguese partners, delivering seamless relocation and business creation in the EU.",
-        "hero-cta": "Start Discussion",
-        "card-title": "Why Portugal for Japanese Business?",
-        "card-p1": "Strategic Gateway to European & Portuguese-speaking markets (CPLP).",
-        "card-p2": "Attractive D2 Entrepreneurial Visa route with clear business plan requirements.",
-        "card-p3": "Safe, business-friendly environment with skilled European talent.",
-        "services-title": "Tailored Entry Packages",
-        "services-desc": "Structured advisory services designed to satisfy Japanese corporate risk standards and Portuguese administrative compliance.",
-        "p1-title": "Market Landing",
-        "p1-desc": "Designed for individual entrepreneurs and small business founders initiating operations in Portugal.",
-        "p1-f1": "Business entity recommendation",
-        "p1-f2": "NIF (Tax ID) & Bank Account setup",
-        "p1-f3": "D2 Entrepreneur Visa orientation",
-        "p2-title": "Corporate Branch",
-        "p2-desc": "Complete company establishment and ongoing compliance support for corporate expansions.",
-        "p2-f1": "Subsidiary / Branch Registration",
-        "p2-f2": "Local tax & accounting coordination",
-        "p2-f3": "Virtual & physical office sourcing",
-        "p3-title": "Executive Relocation",
-        "p3-desc": "Dedicated concierge and administrative assistance for executives and families settling in Portugal.",
-        "p3-f1": "Residential property sourcing & lease review",
-        "p3-f2": "Schooling & healthcare orientation",
-        "p3-f3": "Bilingual administrative support",
-        "form-title": "Consultation Request",
-        "form-sub": "Speak with our Japanese-fluent coordination team.",
-        "lbl-name": "Full Name / お名前",
-        "lbl-email": "Email / メールアドレス",
-        "lbl-service": "Interested Service / ご希望のサービス",
-        "lbl-msg": "Message / お問い合わせ内容",
-        "opt-1": "Market Landing Package",
-        "opt-2": "Corporate Branch Package",
-        "opt-3": "Executive Relocation",
-        "opt-4": "General Inquiry",
-        "gdpr-label": "I consent to Okaerinasai processing my details to reply to this inquiry in accordance with GDPR regulations.",
-        "btn-submit": "Send Consultation Request",
-        "ft-desc": "Empowering Japanese entities and founders to successfully navigate Portuguese business expansion.",
-        "ft-head-nav": "Navigation",
-        "ft-head-contact": "Office",
-        "ft-disclaimer": "Okaerinasai is an independent corporate advisory and relocation agency in Portugal. All legal, immigration, and accounting advisory services are conducted directly through our network of licensed Portuguese lawyers and certified public accountants."
-      },
-      ja: {
-        "nav-services": "サービス一覧",
-        "nav-about": "会社概要",
-        "nav-contact": "お問い合わせ",
-        "nav-cta": "無料相談を予約",
-        "hero-tag": "日系企業向けポルトガル進出・市場参入アドバイザリー",
-        "hero-title": "ポルトガルでの事業進出と安心の現地生活をサポート",
-        "hero-desc": "ポルトガルの有資格弁護士・会計士ネットワークと日本語デスクにより、日系企業や起業家の皆様の欧州進出・法人設立・ビザ手続をワンストップで伴走支援します。",
-        "hero-cta": "無料相談を申し込む",
-        "card-title": "なぜ今、ポルトガルなのか？",
-        "card-p1": "EUおよびポルトガル語圏市場（CPLP）への戦略的ゲートウェイ",
-        "card-p2": "事業計画を重視した起業家向け「D2ビザ」制度の活用",
-        "card-p3": "治安が良くコストパフォーマンスに優れた欧州のビジネス拠点",
-        "services-title": "進出支援パッケージ",
-        "services-desc": "日系企業の意思決定プロセスやリスク管理に応える透明性の高いソリューションをご提供します。",
-        "p1-title": "マーケット・ランディング",
-        "p1-desc": "個人起業家やスモールビジネスのポルトガル進出・立ち上げに最適なエントリープランです。",
-        "p1-f1": "事業形態および進出スキームのアドバイス",
-        "p1-f2": "納税番号(NIF)取得・現地銀行口座開設サポート",
-        "p1-f3": "D2起業家ビザ申請へのロードマップ作成",
-        "p2-title": "コーポレート・ブランチ",
-        "p2-desc": "日系企業の現地法人・支店設立およびガバナンス・コンプライアンス構築を支援します。",
-        "p2-f1": "現地法人・支店登記手続きの手配",
-        "p2-f2": "現地有資格会計士・税理士との連携サポート",
-        "p2-f3": "バーチャルオフィス・賃貸オフィスのリサーチ",
-        "p3-title": "エグゼクティブ・リロケーション",
-        "p3-desc": "経営者・駐在員およびご家族の現地移住と生活立ち上げを徹底サポートします。",
-        "p3-f1": "住居リサーチおよび賃貸契約のアドバイス",
-        "p3-f2": "インターナショナルスクール・医療環境のご案内",
-        "p3-f3": "現地行政手続きの日本語同行サポート",
-        "form-title": "進出・移住のご相談",
-        "form-sub": "日本語対応スタッフが丁寧にお答えいたします。",
-        "lbl-name": "お名前 / 貴社名",
-        "lbl-email": "メールアドレス",
-        "lbl-service": "ご検討中のサービス",
-        "lbl-msg": "お問い合わせ内容",
-        "opt-1": "マーケット・ランディング（創業・個人起業）",
-        "opt-2": "コーポレート・ブランチ（法人進出）",
-        "opt-3": "エグゼクティブ・リロケーション（移住）",
-        "opt-4": "その他のお問い合わせ",
-        "gdpr-label": "GDPR（EU一般データ保護規則）に基づき、お問い合わせ対応の目的での個人情報処理に同意します。",
-        "btn-submit": "相談リクエストを送信",
-        "ft-desc": "日本とポルトガルの架け橋として、確かな情報と現地ネットワークで進出をサポートします。",
-        "ft-head-nav": "ナビゲーション",
-        "ft-head-contact": "拠点",
-        "ft-disclaimer": "Okaerinasaiはポルトガルを拠点とするビジネスコンサルティング・リロケーション支援機関です。法務・ビザ手続き・税務関連業務は、提携する現地の有資格弁護士および公認会計士が直接執り行います。"
+<div class="divider"><span class="dot"></span></div>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="process.kicker">How it works</span>
+      <h2 data-i18n="process.h2">A clear path from first call to settled in Portugal.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="p-item">
+        <div class="num">1</div>
+        <p><strong data-i18n="p1.title">Consultation.</strong> <span data-i18n="p1.text">A free call with your dedicated contact to understand your business and goals.</span></p>
+      </div>
+      <div class="p-item">
+        <div class="num">2</div>
+        <p><strong data-i18n="p2.title">Plan &amp; filing.</strong> <span data-i18n="p2.text">We build your business plan and application, with our lawyer reviewing every legal step.</span></p>
+      </div>
+      <div class="p-item">
+        <div class="num">3</div>
+        <p><strong data-i18n="p3.title">Arrival &amp; support.</strong> <span data-i18n="p3.text">Once approved, we help you settle in and keep your business compliant.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="about-team">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="team.kicker">Who's behind this</span>
+      <h2 data-i18n="team.h2">A small team, backed by licensed partners.</h2>
+    </div>
+    <div class="trust-box">
+      <p data-i18n="team.text">Okaerinasai is run by a team based in Portugal with partners in Japan. Legal filings are handled by our partner immigration lawyer in Lisbon; accounting and company setup by our partner accountant. Every client works directly with a dedicated relationship manager from the first call through your first year in Portugal.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="faq.kicker">Questions</span>
+      <h2 data-i18n="faq.h2">Good to know before you start.</h2>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq1.q">Do I need to invest a fixed amount of money?</h3>
+      <p data-i18n="faq1.a">No. The D2 visa has no fixed investment minimum, unlike the Golden Visa. What matters is a credible business plan and proof you can support yourself in Portugal.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq2.q">Do you give investment or tax advice?</h3>
+      <p data-i18n="faq2.a">No. We provide general information on business immigration options and manage the practical process. For investment, tax, or legal advice specific to your situation, we work alongside our licensed lawyer and accountant partners.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq3.q">How long does the whole process take?</h3>
+      <p data-i18n="faq3.a">Typically 4–8 months from application to a visa decision, depending on consulate processing times, plus time to prepare your business plan.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq4.q">Can my family come with me?</h3>
+      <p data-i18n="faq4.a">Yes, the D2 visa allows family reunification for spouses and dependent children. We'll cover this in your initial consultation.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="contact.kicker">Get started</span>
+      <h2 data-i18n="contact.h2">Book your free consultation.</h2>
+      <p data-i18n="contact.p">Tell us a little about your business and goals. We'll reply within two business days to schedule a call.</p>
+    </div>
+    <form id="consultation-form" action="https://formspree.io/f/xzezrylk" method="POST">
+      <div>
+        <label for="name" data-i18n="label.name">Name</label>
+        <input type="text" id="name" name="name" required data-i18n-placeholder="name.placeholder" placeholder="Your name">
+      </div>
+      <div>
+        <label for="email" data-i18n="label.email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+      </div>
+      <div>
+        <label for="business" data-i18n="label.business">What kind of business are you planning?</label>
+        <input type="text" id="business" name="business" data-i18n-placeholder="business.placeholder" placeholder="e.g. e-commerce, consulting, restaurant">
+      </div>
+      <div>
+        <label for="timeline" data-i18n="label.timeline">When are you hoping to move?</label>
+        <select id="timeline" name="timeline">
+          <option data-i18n="opt1">Within 6 months</option>
+          <option data-i18n="opt2">6–12 months</option>
+          <option data-i18n="opt3">Just exploring</option>
+        </select>
+      </div>
+      <div>
+        <div class="label-row">
+          <label for="message" data-i18n="label.message">Anything else we should know?</label>
+          <span id="char-count" class="char-count">0/500</span>
+        </div>
+        <textarea id="message" rows="3" name="message" maxlength="500" data-i18n-placeholder="message.placeholder" placeholder="Optional"></textarea>
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="consent" name="gdpr_consent" required>
+        <span data-i18n="label.consent">Information you submit is used only to respond to your enquiry and is processed in accordance with EU GDPR</span>
+      </label>
+      <button type="submit" id="submit-btn" class="btn btn-primary" data-i18n="btn.submit">Request a consultation</button>
+      <div id="form-status" style="margin-top:12px; font-size:0.9rem; color:#8FB4DA;"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer" data-i18n="footer.disclaimer">Okaerinasai.eu provides business strategy consulting, relocation management, and project coordination. We also work with our licensed Portuguese legal and accounting partners, who provide formal legal representation, visa application filings, and tax advisory services. Outcomes depend on individual client circumstances.</p>
+    <p class="copy" data-i18n="footer.copy">© 2026 Okaerinasai. Lisbon, Portugal.</p>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  ja: {
+    "nav.services":"サービス","nav.process":"流れ","nav.about":"会社概要","nav.faq":"よくある質問","nav.contact":"お問い合わせ",
+    "hero.h1":"ポルトガルでの起業を、両国を知るチームがサポートします。",
+    "hero.lead":"日本語対応のチームと、認可を受けたポルトガルの提携専門家が、会社設立からD2ビザの取得、定住まで一貫してサポートします。",
+    "hero.ctaPrimary":"無料相談を予約する","hero.ctaGhost":"サービス内容を見る",
+    "about.kicker":"なぜ今、ポルトガルなのか","about.h2":"投資最低額なしで、EUへの拠点を。",
+    "about.p":"D2ビザを利用すれば、起業家や個人事業主は、固定の資本要件や雇用創出義務なしに、ポルトガルで事業を興し居住権を申請できます。重要なのは、説得力のある事業計画です。",
+    "fact1.label":"D2ビザに必要な最低投資額","fact2.label":"シェンゲン圏内での市場アクセスと移動の自由","fact3.label":"現行のポルトガル法における市民権取得までの期間",
+    "services.kicker":"サービス","services.h2":"3つのステージ、ひとつのチーム。",
+    "services.p":"1つのステージのみのご依頼も、最初から最後までの一貫したご依頼も可能です。各ステージには、専任の担当者と、認可を受けたポルトガルの弁護士・会計士パートナーが含まれます。",
+    "package1.title":"事業性評価・事業計画書作成","package1.tagline":"本格的に取り組む前に、ポルトガルでの事業の実現性を確認します。",
+    "package1.li1":"チームとの個別相談","package1.li2":"市場・業種の実現可能性評価",
+    "package1.li3":"ポルトガルの移民要件に沿った事業計画書の作成","package1.li4":"ビザ選択肢の明確な比較",
+    "package2.title":"会社設立・D2ビザ申請フルサポート","package2.tagline":"事業設立からポルトガル移住まで、必要な手続きをすべて代行します。",
+    "package2.li1":"「事業性評価・事業計画書作成」の内容をすべて含む","package2.li2":"ポルトガルでの会社登記",
+    "package2.li3":"銀行口座開設・税務登録","package2.li4":"提携弁護士によるD2ビザ申請の作成・提出",
+    "package2.li5":"ビザ結果が出るまでの全過程をサポート",
+    "package3.title":"初年度サポート","package3.tagline":"手続き完了後も、継続的なサポートで安心の定住を。",
+    "package3.li1":"「会社設立・D2ビザ申請フルサポート」の内容をすべて含む","package3.li2":"専任担当者との月次面談",
+    "package3.li3":"提携会計士との記帳業務の調整","package3.li4":"ビザ更新の準備","package3.li5":"日常の事業・事務に関するご相談対応",
+    "process.kicker":"ご利用の流れ","process.h2":"初回のご相談から定住まで、明確な道筋を。",
+    "p1.title":"ご相談。","p1.text":"専任担当者との無料相談で、事業内容とご希望を伺います。",
+    "p2.title":"計画・申請。","p2.text":"事業計画書と申請書類を作成し、弁護士が法的手続きを確認します。",
+    "p3.title":"渡航・サポート。","p3.text":"認可後は、定住のサポートと事業のコンプライアンス維持をお手伝いします。",
+    "team.kicker":"運営チームについて","team.h2":"少人数のチームと、信頼できる提携専門家。",
+    "team.text":"Okaerinasaiは、ポルトガルを拠点とし日本にパートナーを持つチームが運営しています。法的手続きはリスボンの提携移民弁護士が、会計・会社設立は提携会計士が担当します。お客様には初回のご相談から渡航後1年間まで、専任の担当者が一貫して対応します。",
+    "faq.kicker":"よくあるご質問","faq.h2":"始める前に知っておきたいこと。",
+    "faq1.q":"決まった投資額が必要ですか?","faq1.a":"いいえ。ゴールデンビザとは異なり、D2ビザに投資額の最低基準はありません。重要なのは、説得力のある事業計画と、ポルトガルでの生活を維持できる資力の証明です。",
+    "faq2.q":"投資や税務に関するアドバイスはもらえますか?","faq2.a":"いいえ。当社は事業移民に関する一般的な情報提供と実務対応を行っています。投資・税務・法律に関する個別のアドバイスについては、提携する弁護士・会計士と連携して対応します。",
+    "faq3.q":"手続き全体にどのくらい時間がかかりますか?","faq3.a":"領事館の審査期間にもよりますが、申請からビザ決定まで通常4〜8ヶ月程度、これに事業計画書の準備期間が加わります。",
+    "faq4.q":"家族も一緒に移住できますか?","faq4.a":"はい。D2ビザは配偶者や扶養家族の家族呼び寄せに対応しています。詳細は初回相談でご説明します。",
+    "contact.kicker":"お問い合わせ","contact.h2":"無料相談のご予約。",
+    "contact.p":"事業内容とご希望について、簡単にお聞かせください。2営業日以内にご返信し、面談日程を調整します。",
+    "label.name":"お名前","label.email":"メールアドレス","label.business":"どのような事業を計画されていますか?","label.timeline":"いつ頃の移住をご希望ですか?",
+    "opt1":"6ヶ月以内","opt2":"6〜12ヶ月","opt3":"検討段階","label.message":"その他、お伝えいただきたいこと","btn.submit":"相談を予約する",
+    "label.consent":"送信いただいた情報は、ご相談への対応のみに使用され、EU GDPR（EU一般データ保護規則）に準拠して処理されます。",
+    "name.placeholder":"お名前","business.placeholder":"例:ECサイト、コンサルティング、飲食店","message.placeholder":"任意（500文字以内）",
+    "footer.disclaimer":"Okaerinasai.euは事業戦略コンサルティング、移住マネジメント、各種調整業務を行っています。正式な法的代理、ビザ申請、税務アドバイザリーサービスについては、提携するポルトガルの有資格弁護士および会計士が提供いたします。結果は個々の状況により異なります。",
+    "footer.copy":"© 2026 Okaerinasai. リスボン、ポルトガル。"
+  },
+  en: {
+    "nav.services":"Services","nav.process":"Process","nav.about":"About","nav.faq":"FAQ","nav.contact":"Contact",
+    "hero.h1":"Start your business in Portugal, guided by people who know both worlds.",
+    "hero.lead":"We help entrepreneurs open a company, secure a D2 visa, and settle in Portugal — with a Japanese-speaking team and licensed Portuguese partners handling every step.",
+    "hero.ctaPrimary":"Book a free consultation","hero.ctaGhost":"See our services",
+    "about.kicker":"Why Portugal, why now","about.h2":"An EU foothold, without an investment minimum.",
+    "about.p":"The D2 visa lets entrepreneurs and the self-employed open a business in Portugal and apply for residency — no fixed capital requirement, no job-creation quota. What matters is a credible, well-built business plan.",
+    "fact1.label":"Fixed investment minimum for the D2 route",
+    "fact2.label":"Market access and freedom of movement within the Schengen area",
+    "fact3.label":"Path to citizenship under current Portuguese law",
+    "services.kicker":"Services","services.h2":"Three stages, one team.",
+    "services.p":"Work with us for a single stage, or start to finish. Every stage includes your dedicated relationship manager and our licensed Portuguese legal and accounting partners.",
+    "package1.title":"Business Feasibility & Plan","package1.tagline":"Find out if your business is ready for Portugal, before you commit to anything.",
+    "package1.li1":"One-on-one consultation with our team","package1.li2":"Market and sector viability assessment",
+    "package1.li3":"Full business plan built to Portuguese immigration requirements","package1.li4":"Clear comparison of your visa options",
+    "package2.title":"Full Company Setup & D2 Visa","package2.tagline":"Everything you need to open your business and move to Portugal, managed end to end.",
+    "package2.li1":"Everything in Business Feasibility & Plan","package2.li2":"Company registration in Portugal",
+    "package2.li3":"Bank account and tax setup","package2.li4":"D2 visa application, prepared and filed by our partner lawyer",
+    "package2.li5":"Support through every step until your visa decision",
+    "package3.title":"First-Year Support","package3.tagline":"Get settled with ongoing help, not just a one-time filing.",
+    "package3.li1":"Everything in Full Company Setup & D2 Visa","package3.li2":"Monthly check-ins with your dedicated contact",
+    "package3.li3":"Bookkeeping coordination with our accounting partner","package3.li4":"Visa renewal preparation",
+    "package3.li5":"Help with day-to-day business and admin questions",
+    "process.kicker":"How it works","process.h2":"A clear path from first call to settled in Portugal.",
+    "p1.title":"Consultation.","p1.text":"A free call with your dedicated contact to understand your business and goals.",
+    "p2.title":"Plan & filing.","p2.text":"We build your business plan and application, with our lawyer reviewing every legal step.",
+    "p3.title":"Arrival & support.","p3.text":"Once approved, we help you settle in and keep your business compliant.",
+    "team.kicker":"Who's behind this","team.h2":"A small team, backed by licensed partners.",
+    "team.text":"Okaerinasai is run by a team based in Portugal with partners in Japan. Legal filings are handled by our partner immigration lawyer in Lisbon; accounting and company setup by our partner accountant. Every client works directly with a dedicated relationship manager from the first call through your first year in Portugal.",
+    "faq.kicker":"Questions","faq.h2":"Good to know before you start.",
+    "faq1.q":"Do I need to invest a fixed amount of money?","faq1.a":"No. The D2 visa has no fixed investment minimum, unlike the Golden Visa. What matters is a credible business plan and proof you can support yourself in Portugal.",
+    "faq2.q":"Do you give investment or tax advice?","faq2.a":"No. We provide general information on business immigration options and manage the practical process. For investment, tax, or legal advice specific to your situation, we work alongside our licensed lawyer and accountant partners.",
+    "faq3.q":"How long does the whole process take?","faq3.a":"Typically 4–8 months from application to a visa decision, depending on consulate processing times, plus time to prepare your business plan.",
+    "faq4.q":"Can my family come with me?","faq4.a":"Yes, the D2 visa allows family reunification for spouses and dependent children. We'll cover this in your initial consultation.",
+    "contact.kicker":"Get started","contact.h2":"Book your free consultation.",
+    "contact.p":"Tell us a little about your business and goals. We'll reply within two business days to schedule a call.",
+    "label.name":"Name","label.email":"Email","label.business":"What kind of business are you planning?","label.timeline":"When are you hoping to move?",
+    "opt1":"Within 6 months","opt2":"6–12 months","opt3":"Just exploring","label.message":"Anything else we should know?","btn.submit":"Request a consultation",
+    "label.consent":"Information you submit is used only to respond to your enquiry and is processed in accordance with EU GDPR",
+    "name.placeholder":"Your name","business.placeholder":"e.g. e-commerce, consulting, restaurant","message.placeholder":"Optional (max 500 chars)",
+    "footer.disclaimer":"Okaerinasai.eu provides business strategy consulting, relocation management, and project coordination. We also work with our licensed Portuguese legal and accounting partners, who provide formal legal representation, visa application filings, and tax advisory services. Outcomes depend on individual client circumstances.",
+    "footer.copy":"© 2026 Okaerinasai. Lisbon, Portugal."
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(translations[lang][key] !== undefined){ el.textContent = translations[lang][key]; }
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var key = el.getAttribute('data-i18n-placeholder');
+    if(translations[lang][key] !== undefined){ el.placeholder = translations[lang][key]; }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  document.getElementById('navlist').classList.remove('open');
+}
+
+// Auto-close mobile navigation when a section link is tapped
+document.querySelectorAll('#navlist a').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navlist').classList.remove('open');
+  });
+});
+
+// Character Counter for Message Textarea
+const messageInput = document.getElementById("message");
+const charCount = document.getElementById("char-count");
+
+if (messageInput && charCount) {
+  messageInput.addEventListener("input", function() {
+    charCount.textContent = `${this.value.length}/500`;
+  });
+}
+
+// AJAX Form Submission for Formspree
+const form = document.getElementById("consultation-form");
+const status = document.getElementById("form-status");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const data = new FormData(form);
+  const currentLang = document.documentElement.lang || 'en';
+  
+  status.textContent = currentLang === 'ja' ? "送信中..." : "Sending...";
+  
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      status.textContent = currentLang === 'ja' 
+        ? "送信が完了しました。2営業日以内にご連絡いたします。" 
+        : "Thank you! Your request has been sent. We'll reply within two business days.";
+      form.reset();
+      if (charCount) charCount.textContent = "0/500";
+    } else {
+      const errorData = await response.json();
+      if (Object.hasOwn(errorData, 'errors')) {
+        status.textContent = errorData["errors"].map(error => error["message"]).join(", ");
+      } else {
+        status.textContent = currentLang === 'ja' 
+          ? "送信エラーが発生しました。再度お試しくかださい。" 
+          : "Oops! There was a problem submitting your form.";
       }
-    };
-
-    function setLanguage(lang) {
-      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`btn-${lang}`).classList.add('active');
-
-      Object.keys(dict[lang]).forEach(key => {
-        const el = document.getElementById(key);
-        if (el) el.textContent = dict[lang][key];
-      });
     }
+  } catch (error) {
+    status.textContent = currentLang === 'ja' 
+      ? "通信エラーが発生しました。時間を置いて再度お試しください。" 
+      : "Oops! Network error. Please try again later.";
+  }
+});
+</script>
 
-    // Character Counter
-    const msgField = document.getElementById('message-field');
-    const charNum = document.getElementById('char-num');
-    if (msgField) {
-      msgField.addEventListener('input', () => {
-        charNum.textContent = msgField.value.length;
-      });
-    }
-
-    // Init Lucide Icons
-    lucide.createIcons();
-  </script>
 </body>
 </html>
