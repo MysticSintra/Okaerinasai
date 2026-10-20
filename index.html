@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okaerinasai — Bridging Business Between Asia and Europe</title>
+
+<!-- Favicon & Device Icons -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#1E4470">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Serif+JP:wght@500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6;
+    --paper-deep:#EAE5D6;
+    --ink:#1B1B1F;
+    --ink-soft:#4A4A47;
+    --azulejo:#1E4470;
+    --azulejo-deep:#15304F;
+    --hanko:#A63A2E;
+    --line:#CFC7B2;
+    --max:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:17px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  html[lang="ja"] body{font-family:'Noto Sans JP',sans-serif;}
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    color:var(--ink);
+    margin:0;
+    line-height:1.2;
+  }
+  html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] h3{font-family:'Noto Serif JP',serif;}
+
+  p{margin:0 0 1em 0;}
+  a{color:inherit;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  .prose{max-width:var(--max);}
+
+  /* HEADER LAYOUT */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,239,230,0.96);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  
+  /* Top Block: Logo & Language Switcher */
+  .nav-top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:1040px;margin:0 auto;
+  }
+  .brand{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.25rem;
+    letter-spacing:0.01em;white-space:nowrap;
+  }
+  .brand .jp{font-family:'Noto Sans JP',sans-serif;font-size:0.6em;color:var(--ink-soft);margin-left:8px;font-weight:400;}
+  
+  .nav-top-right{display:flex;align-items:center;gap:16px;}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink);}
+
+  .lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex-shrink:0;}
+  .lang-btn{
+    background:transparent;border:none;padding:6px 10px;font-size:0.82rem;
+    cursor:pointer;color:var(--ink-soft);font-family:'IBM Plex Sans',sans-serif;
+  }
+  .lang-btn.active{background:var(--azulejo);color:var(--paper);}
+  .lang-btn:not(.active):hover{background:var(--paper-deep);color:var(--ink);}
+
+  /* Second Block: Navigation Menu (Left to Right) */
+  .nav-bar{
+    border-top:1px solid var(--line);
+    background:var(--paper-deep);
+  }
+  .wrap-nav{
+    max-width:1040px;margin:0 auto;padding:0 24px;
+  }
+  nav ul{
+    list-style:none;display:flex;gap:36px;margin:0;padding:10px 0;
+    align-items:center;
+  }
+  nav a{
+    text-decoration:none;font-size:0.9rem;font-weight:500;
+    color:var(--ink-soft);letter-spacing:0.02em;
+    transition:color 0.15s ease;
+  }
+  nav a:hover{color:var(--azulejo);}
+
+  @media (max-width:760px){
+    .nav-bar{position:relative;}
+    nav ul{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:var(--paper);border-bottom:1px solid var(--line);
+      flex-direction:column;gap:0;padding:0 24px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+    nav ul.open{display:flex;}
+    nav li{border-bottom:1px solid var(--line);width:100%;}
+    nav li:last-child{border-bottom:none;}
+    nav a{display:block;padding:14px 0;}
+    .nav-toggle{display:block;}
+  }
+
+  /* HERO & SECTIONS */
+  .hero{padding:64px 0 56px;}
+  .route{width:100%;max-width:320px;height:auto;margin-bottom:32px;display:block;}
+  .hero h1{font-size:2.3rem;max-width:640px;}
+  .hero .lead{font-size:1.1rem;color:var(--ink-soft);max-width:520px;margin-top:18px;}
+  .cta-row{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 26px;font-size:0.95rem;
+    text-decoration:none;border-radius:2px;font-weight:500;
+    border:1px solid var(--ink);cursor:pointer;
+  }
+  .btn-primary{background:var(--azulejo);border-color:var(--azulejo);color:var(--paper);}
+  .btn-primary:hover{background:var(--azulejo-deep);}
+  .btn-ghost{background:transparent;color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-deep);}
+
+  .divider{display:flex;align-items:center;gap:14px;margin:0 auto;max-width:1040px;padding:0 24px;}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .divider .dot{width:6px;height:6px;border-radius:50%;background:var(--hanko);flex-shrink:0;}
+
+  section{padding:56px 0;}
+  .section-head{max-width:560px;margin-bottom:36px;}
+  .section-head .kicker{color:var(--azulejo);font-size:0.85rem;margin-bottom:10px;display:block;}
+  .section-head h2{font-size:1.75rem;}
+  .section-head p{color:var(--ink-soft);margin-top:14px;}
+
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  .fact{padding:24px 20px 24px 0;border-bottom:1px solid var(--line);}
+  .fact + .fact{border-left:1px solid var(--line);padding-left:20px;}
+  .fact .num{font-family:'Fraunces',serif;font-size:2rem;color:var(--azulejo);}
+  .fact .label{color:var(--ink-soft);font-size:0.9rem;margin-top:6px;}
+  @media (max-width:680px){
+    .facts{grid-template-columns:1fr;}
+    .fact + .fact{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:20px;}
+  }
+
+  .journey-item{
+    display:grid;grid-template-columns:56px 1fr;gap:22px;
+    padding:32px 0;border-top:1px solid var(--line);
+  }
+  .journey-item:last-child{border-bottom:1px solid var(--line);}
+  .step-num{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--hanko);}
+  .journey-item h3{font-size:1.3rem;margin-bottom:6px;}
+  .journey-item .tagline{color:var(--ink-soft);font-style:italic;margin-bottom:16px;}
+  .journey-item ul{margin:0;padding-left:20px;color:var(--ink-soft);}
+  .journey-item li{margin-bottom:6px;}
+  @media (max-width:600px){.journey-item{grid-template-columns:1fr;gap:8px;}}
+
+  .process-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;}
+  .process-grid .p-item{border-left:2px solid var(--azulejo);padding-left:18px;}
+  .process-grid .p-item .num{color:var(--azulejo);font-family:'Fraunces',serif;font-size:1.05rem;}
+  @media (max-width:720px){.process-grid{grid-template-columns:1fr;}}
+
+  .trust-box{background:var(--paper-deep);border:1px solid var(--line);padding:30px;max-width:var(--max);}
+  .trust-box p{color:var(--ink-soft);margin:0;}
+
+  .faq-item{border-top:1px solid var(--line);padding:20px 0;max-width:var(--max);}
+  .faq-item h3{font-size:1.02rem;font-weight:600;font-family:'IBM Plex Sans',sans-serif;margin-bottom:8px;}
+  html[lang="ja"] .faq-item h3{font-family:'Noto Sans JP',sans-serif;}
+  .faq-item p{color:var(--ink-soft);margin:0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+
+  .contact{background:var(--azulejo-deep);color:var(--paper);}
+  .contact .section-head h2{color:var(--paper);}
+  .contact .section-head p{color:#C9D6E4;}
+  .contact .section-head .kicker{color:#8FB4DA;}
+  form{display:grid;gap:16px;max-width:520px;}
+  label{font-size:0.86rem;color:#C9D6E4;display:block;margin-bottom:6px;}
+  .label-row{display:flex;justify-content:space-between;align-items:baseline;}
+  .char-count{font-size:0.78rem;color:#7E9BBB;}
+  input,select,textarea{
+    width:100%;padding:12px 14px;border:1px solid #3C5F85;
+    background:#1A3859;color:var(--paper);font-family:inherit;font-size:0.95rem;
+    border-radius:2px;
+  }
+  input::placeholder,textarea::placeholder{color:#7E9BBB;}
+  form .btn-primary{background:var(--hanko);border-color:var(--hanko);justify-self:start;margin-top:6px;}
+  form .btn-primary:hover{background:#8A2F25;}
+  .consent{font-size:0.8rem;color:#A9C0D8;display:flex;gap:8px;align-items:flex-start;}
+  .consent input{width:auto;margin-top:3px;}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);}
+  footer .disclaimer{color:var(--ink-soft);font-size:0.83rem;max-width:680px;}
+  footer .copy{color:var(--ink-soft);font-size:0.83rem;margin-top:18px;}
+</style>
+</head>
+<body>
+
+<header>
+  <!-- Top Block: Brand Logo & Language Switcher -->
+  <div class="nav-top">
+    <div class="brand">Okaerinasai<span class="jp">お帰りなさい</span></div>
+    <div class="nav-top-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en" onclick="applyLang('en')">EN</button>
+        <button class="lang-btn" data-lang="ja" onclick="applyLang('ja')">日本語</button>
+        <button class="lang-btn" data-lang="pt" onclick="applyLang('pt')">PT</button>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+
+  <!-- Second Block: Navigation Menu (Left to Right) -->
+  <div class="nav-bar">
+    <nav class="wrap-nav">
+      <ul id="navlist">
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#process" data-i18n="nav.process">Process</a></li>
+        <li><a href="#about-team" data-i18n="nav.about">About</a></li>
+        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <svg class="route" viewBox="0 0 340 90" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,70 C 100,10 240,10 320,70" fill="none" stroke="#1E4470" stroke-width="1.5"/>
+      <circle cx="20" cy="70" r="5" fill="#A63A2E"/>
+      <circle cx="320" cy="70" r="5" fill="#1E4470"/>
+      <text x="20" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Asia</text>
+      <text x="320" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Portugal / Europe</text>
+    </svg>
+    <h1 data-i18n="hero.h1">Empowering business growth by bridging Asia and Europe.</h1>
+    <p class="lead" data-i18n="hero.lead">We help companies scale, expand internationally, and forge strong cross-border partnerships between Asian markets and Portugal.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary" data-i18n="hero.ctaPrimary">Book a consultation</a>
+      <a href="#services" class="btn btn-ghost" data-i18n="hero.ctaGhost">Explore our services</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="about.kicker">The Cross-Border Advantage</span>
+      <h2 data-i18n="about.h2">Building strong relationships across two dynamic worlds.</h2>
+      <p data-i18n="about.p">True business expansion relies on trust, local expertise, and meaningful relationships. Based in Lisbon with deep ties across Asian markets, we serve as your strategic partner for international growth, market entry, and bilateral collaboration.</p>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <div class="num">2-Way</div>
+        <div class="label" data-i18n="fact1.label">Strategic bridge connecting Asian and European enterprises</div>
+      </div>
+      <div class="fact">
+        <div class="num">EU</div>
+        <div class="label" data-i18n="fact2.label">Gateway to European markets anchored in Portugal</div>
+      </div>
+      <div class="fact">
+        <div class="num">100%</div>
+        <div class="label" data-i18n="fact3.label">Bilingual management, legal, and operational support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="services.kicker">Services</span>
+      <h2 data-i18n="services.h2">Comprehensive support for international expansion.</h2>
+      <p data-i18n="services.p">Whether you are bringing an Asian business into Europe or expanding a European enterprise into Asia, our bilingual team and licensed partners guide every stage.</p>
+    </div>
+
+    <div class="journey">
+      <div class="journey-item">
+        <div class="step-num">01</div>
+        <div>
+          <h3 data-i18n="package1.title">Market Feasibility &amp; Strategy</h3>
+          <p class="tagline" data-i18n="package1.tagline">Evaluate opportunities and build a solid roadmap before entering a new market.</p>
+          <ul>
+            <li data-i18n="package1.li1">Bilateral market viability assessment</li>
+            <li data-i18n="package1.li2">Strategic business planning and roadmap design</li>
+            <li data-i18n="package1.li3">Regulatory and compliance overview</li>
+            <li data-i18n="package1.li4">One-on-one expert consultation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="journey-item">
+        <div class="step-num">02</div>
+        <div>
+          <h3 data-i18n="package2.title">Cross-Border Partnership &amp; Setup</h3>
+          <p class="tagline" data-i18n="package2.tagline">Establish your corporate entity and forge powerful relationships with local partners.</p>
+          <ul>
+            <li data-i18n="package2.li1">Company incorporation and corporate setup support</li>
+            <li data-i18n="package2.li2">Strategic partner matching and network introductions</li>
+            <li data-i18n="package2.li3">Bilingual contract negotiation and coordination</li>
+            <li data-i18n="package2.li4">Legal and accounting setup with licensed local partners</li>
+            <li data-i18n="package2.li5">Full guidance through administrative milestones</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="journey-item">
+        <div class="step-num">03</div>
+        <div>
+          <h3 data-i18n="package3.title">Ongoing Growth &amp; Management</h3>
+          <p class="tagline" data-i18n="package3.tagline">Sustain your expansion with continuous operational support and relationship management.</p>
+          <ul>
+            <li data-i18n="package3.li1">Dedicated relationship manager for daily operations</li>
+            <li data-i18n="package3.li2">Ongoing cross-border communication and coordination</li>
+            <li data-i18n="package3.li3">Bookkeeping and tax advisory synchronization</li>
+            <li data-i18n="package3.li4">Regular strategic performance reviews</li>
+            <li data-i18n="package3.li5">Expansion scaling and brand scaling support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="process.kicker">How it works</span>
+      <h2 data-i18n="process.h2">A clear, transparent path to global growth.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="p-item">
+        <div class="num">1</div>
+        <p><strong data-i18n="p1.title">Discovery.</strong> <span data-i18n="p1.text">An initial consultation to understand your business goals and target markets.</span></p>
+      </div>
+      <div class="p-item">
+        <div class="num">2</div>
+        <p><strong data-i18n="p2.title">Strategy &amp; Connection.</strong> <span data-i18n="p2.text">We design your expansion roadmap and connect you with the right partners.</span></p>
+      </div>
+      <div class="p-item">
+        <div class="num">3</div>
+        <p><strong data-i18n="p3.title">Execution &amp; Scale.</strong> <span data-i18n="p3.text">We handle the implementation and support your ongoing business growth.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="about-team">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="team.kicker">Who's behind this</span>
+      <h2 data-i18n="team.h2">Rooted in Portugal, connected across Asia.</h2>
+    </div>
+    <div class="trust-box">
+      <p data-i18n="team.text">Okaerinasai is operated by an experienced team based in Lisbon with deep connections in Japan and broader Asian markets. We work closely with licensed legal, tax, and corporate partners to ensure every business venture is legally sound, culturally aligned, and built for long-term success.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="dot"></span></div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="faq.kicker">Questions</span>
+      <h2 data-i18n="faq.h2">Everything you need to know to get started.</h2>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq1.q">What kind of businesses do you work with?</h3>
+      <p data-i18n="faq1.a">We work with entrepreneurs, SMEs, creators, and established corporations looking to expand or establish operations between Asian markets and Portugal/Europe.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq2.q">How do you help build relationships between Asia and Europe?</h3>
+      <p data-i18n="faq2.a">We bridge language, cultural, and regulatory barriers by acting as your dedicated local liaison, negotiating on your behalf, and introducing vetted strategic partners.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq3.q">Do you handle legal and tax matters directly?</h3>
+      <p data-i18n="faq3.a">We coordinate the practical process and strategy. Formal legal representation, visa filings, and tax advisory services are provided directly by our licensed partner attorneys and accountants.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-i18n="faq4.q">How long does an international expansion project take?</h3>
+      <p data-i18n="faq4.a">Timelines vary based on scope—ranging from a few weeks for feasibility studies and partner matching to several months for full corporate setups and visa processing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" data-i18n="contact.kicker">Get started</span>
+      <h2 data-i18n="contact.h2">Book your free consultation.</h2>
+      <p data-i18n="contact.p">Tell us about your business and your international expansion goals. We'll reply within two business days.</p>
+    </div>
+    <form id="consultation-form" action="https://formspree.io/f/xzezrylk" method="POST">
+      <div>
+        <label for="name" data-i18n="label.name">Name / Company Name</label>
+        <input type="text" id="name" name="name" required data-i18n-placeholder="name.placeholder" placeholder="Your name or company">
+      </div>
+      <div>
+        <label for="email" data-i18n="label.email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+      </div>
+      <div>
+        <label for="business" data-i18n="label.business">What is your business focus or project?</label>
+        <input type="text" id="business" name="business" data-i18n-placeholder="business.placeholder" placeholder="e.g. Expanding from Japan to Portugal">
+      </div>
+      <div>
+        <label for="timeline" data-i18n="label.timeline">What is your target timeline?</label>
+        <select id="timeline" name="timeline">
+          <option data-i18n="opt1">Within 6 months</option>
+          <option data-i18n="opt2">6–12 months</option>
+          <option data-i18n="opt3">Just exploring</option>
+        </select>
+      </div>
+      <div>
+        <div class="label-row">
+          <label for="message" data-i18n="label.message">Anything else we should know?</label>
+          <span id="char-count" class="char-count">0/500</span>
+        </div>
+        <textarea id="message" rows="3" name="message" maxlength="500" data-i18n-placeholder="message.placeholder" placeholder="Optional"></textarea>
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="consent" name="gdpr_consent" required>
+        <span data-i18n="label.consent">Information you submit is used only to respond to your enquiry and is processed in accordance with EU GDPR</span>
+      </label>
+      <button type="submit" id="submit-btn" class="btn btn-primary" data-i18n="btn.submit">Request a consultation</button>
+      <div id="form-status" style="margin-top:12px; font-size:0.9rem; color:#8FB4DA;"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer" data-i18n="footer.disclaimer">Okaerinasai provides business strategy consulting, international expansion management, and cross-border project coordination. Formal legal representation, immigration filings, and tax advisory services are provided by our licensed Portuguese partners. Outcomes depend on individual client circumstances.</p>
+    <p class="copy" data-i18n="footer.copy">© 2026 Okaerinasai. Lisbon, Portugal.</p>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  ja: {
+    "nav.services":"サービス","nav.process":"流れ","nav.about":"会社概要","nav.faq":"よくある質問","nav.contact":"お問い合わせ",
+    "hero.h1":"アジアとヨーロッパを繋ぎ、ビジネスの成長を加速させる。",
+    "hero.lead":"私たちは、アジア市場とポルトガルの間で強固な関係を築き、企業のスケーリングや国際展開をトータルでサポートします。",
+    "hero.ctaPrimary":"無料相談を予約する","hero.ctaGhost":"サービスを見る",
+    "about.kicker":"クロスボーダーの強み","about.h2":"2つのダイナミックな世界を結ぶ、強固なパートナーシップ。",
+    "about.p":"真のビジネス拡大には、信頼、現地の専門知識、そして意義深い関係性が不可欠です。リスボンを拠点としアジア市場に深いネットワークを持つ私たちは、国際的な成長、市場参入、二国間協力を実現する戦略的パートナーです。",
+    "fact1.label":"アジアとヨーロッパの企業を結ぶ双方向の戦略的ブリッジ",
+    "fact2.label":"ポルトガルを拠点とした欧州市場へのゲートウェイ",
+    "fact3.label":"バイリンガルによる経営、法務、および運営サポート",
+    "services.kicker":"サービス","services.h2":"国際展開のための包括的なサポート。",
+    "services.p":"アジア企業をヨーロッパへ進出させる場合でも、ヨーロッパ企業をアジアへ拡大させる場合でも、バイリンガルチームと提携専門家があらゆる段階を導きます。",
+    "package1.title":"市場調査・事業戦略策定","package1.tagline":"新しい市場へ参入する前に、機会を評価し確実なロードマップを構築します。",
+    "package1.li1":"二国間市場の実現可能性評価",
+    "package1.li2":"戦略的事業計画およびロードマップの設計",
+    "package1.li3":"規制およびコンプライアンスの概要把握",
+    "package1.li4":"専門家による個別コンサルティング",
+    "package2.title":"クロスボーダー提携・法人設立","package2.tagline":"法人を設立し、現地のパートナーと強力な関係を構築します。",
+    "package2.li1":"会社設立およびコーポレートセットアップのサポート",
+    "package2.li2":"戦略的パートナーのマッチングとネットワーク紹介",
+    "package2.li3":"バイリンガルによる契約交渉と調整",
+    "package2.li4":"地元の有資格パートナーによる法務・会計の整備",
+    "package2.li5":"行政手続きにおける完全な伴走支援",
+    "package3.title":"継続的な成長・経営管理サポート","package3.tagline":"継続的な運営サポートと関係管理により、拡大を維持・発展させます。",
+    "package3.li1":"日々の運営を支える専任マネージャーの配置",
+    "package3.li2":"継続的なクロスボーダーのコミュニケーションと調整",
+    "package3.li3":"記帳および税務アドバイザリーの同期化",
+    "package3.li4":"定期的な戦略的パフォーマンスレビュー",
+    "package3.li5":"事業拡大およびブランドスケーリングの支援",
+    "process.kicker":"ご利用の流れ","process.h2":"グローバル展開への明確で透明な道筋。",
+    "p1.title":"ディスカバリー。","p1.text":"貴社のビジネス目標とターゲット市場を把握するための初回相談。",
+    "p2.title":"戦略と接続。","p2.text":"展開ロードマップを設計し、最適なパートナーとお引き合わせします。",
+    "p3.title":"実行とスケール。","p3.text":"実務の実行を代行し、継続的なビジネスの成長をサポートします。",
+    "team.kicker":"運営チームについて","team.h2":"ポルトガルに根ざし、アジア全体とつながる。",
+    "team.text":"Okaerinasaiは、リスボンを拠点とし日本やアジア市場に深いネットワークを持つ経験豊富なチームによって運営されています。法務・税務・企業の有資格パートナーと密に連携し、すべての事業が法的基盤を持ち、文化的にも適合した長期的な成功を収めるようサポートします。",
+    "faq.kicker":"よくあるご質問","faq.h2":"始める前に知っておきたいこと。",
+    "faq1.q":"どのような企業と協業していますか？","faq1.a":"アジア市場とポルトガル・ヨーロッパの間で事業拡大や拠点設立を目指す起業家、中小企業、クリエイター、大手企業と協業しています。",
+    "faq2.q":"アジアとヨーロッパの間の関係構築をどのようにサポートしますか？","faq2.a":"専任のローカルリエゾンとして言語・文化・規制の壁を解消し、交渉の代行や厳選された戦略的パートナーのご紹介を行います。",
+    "faq3.q":"法務や税務に関する事項は直接担当しますか？","faq3.a":"実務プロセスや戦略の調整を担当します。正式な法的代理、ビザ申請、税務アドバイザリーサービスは、有資格の提携弁護士および会計士が直接提供します。",
+    "faq4.q":"国際展開プロジェクトにはどれくらいの時間がかかりますか？","faq4.a":"期間はスコープによって異なります。調査やパートナーマッチングの数週間から、法人設立やビザ処理を含める数ヶ月まで様々です。",
+    "contact.kicker":"お問い合わせ","contact.h2":"無料相談のご予約。",
+    "contact.p":"貴社のビジネスや国際展開の目標についてお聞かせください。2営業日以内にご返信いたします。",
+    "label.name":"お名前 / 企業名","label.email":"メールアドレス","label.business":"事業の焦点またはプロジェクト内容","label.timeline":"目標とする時期は？",
+    "opt1":"6ヶ月以内","opt2":"6〜12ヶ月","opt3":"検討段階","label.message":"その他、お伝えいただきたいこと","btn.submit":"相談を予約する",
+    "label.consent":"送信いただいた情報は、ご相談への対応のみに使用され、EU GDPR（EU一般データ保護規則）に準拠して処理されます。",
+    "name.placeholder":"お名前または企業名","business.placeholder":"例：日本からポルトガルへの事業展開","message.placeholder":"任意（500文字以内）",
+    "footer.disclaimer":"Okaerinasaiは、事業戦略コンサルティング、国際展開マネジメント、クロスボーダーのプロジェクト調整を行います。正式な法的代理、移民申請、税務アドバイザリーサービスは、ポルトガルの有資格パートナーが提供します。",
+    "footer.copy":"© 2026 Okaerinasai. リスボン、ポルトガル。"
+  },
+  pt: {
+    "nav.services":"Serviços","nav.process":"Processo","nav.about":"Sobre","nav.faq":"FAQ","nav.contact":"Contato",
+    "hero.h1":"Impulsionando o crescimento empresarial conectando a Ásia e a Europa.",
+    "hero.lead":"Ajudamos empresas a escalar, expandir internacionalmente e forjar parcerias transfronteiriças sólidas entre os mercados asiáticos e Portugal.",
+    "hero.ctaPrimary":"Agendar Consulta","hero.ctaGhost":"Explorar serviços",
+    "about.kicker":"A Vantagem Transfronteiriça","about.h2":"Construindo fortes relações entre dois mundos dinâmicos.",
+    "about.p":"A verdadeira expansão empresarial baseia-se na confiança, experiência local e em relações significativas. Com sede em Lisboa e fortes ligações aos mercados asiáticos, atuamos como seu parceiro estratégico para o crescimento internacional, entrada no mercado e colaboração bilateral.",
+    "fact1.label":"Ponte estratégica bilateral conectando empresas asiáticas e europeias",
+    "fact2.label":"Gateway para os mercados europeus ancorado em Portugal",
+    "fact3.label":"Gestão bilíngue, suporte jurídico e operacional completo",
+    "services.kicker":"Serviços","services.h2":"Suporte abrangente para expansão internacional.",
+    "services.p":"Quer esteja a trazer um negócio asiático para a Europa ou a expandir uma empresa europeia para a Ásia, a nossa equipa bilíngue e parceiros licenciados orientam cada etapa.",
+    "package1.title":"Viabilidade de Mercado e Estratégia","package1.tagline":"Avalie oportunidades e construa um roteiro sólido antes de entrar num novo mercado.",
+    "package1.li1":"Avaliação bilateral da viabilidade de mercado",
+    "package1.li2":"Planeamento estratégico de negócios e design de roteiro",
+    "package1.li3":"Visão geral regulatória e de conformidade",
+    "package1.li4":"Consulta especializada individualizada",
+    "package2.title":"Parceria Transfronteiriça e Estruturação","package2.tagline":"Estabeleça a sua entidade corporativa e crie parcerias poderosas com atores locais.",
+    "package2.li1":"Constituição de empresas e suporte de configuração corporativa",
+    "package2.li2":"Matching de parceiros estratégicos e introduções na rede",
+    "package2.li3":"Negociação de contratos bilíngues e coordenação",
+    "package2.li4":"Configuração jurídica e contabilística com parceiros locais licenciados",
+    "package2.li5":"Orientação completa através de marcos administrativos",
+    "package3.title":"Crescimento Contínuo e Gestão","package3.tagline":"Sustente a sua expansão com suporte operacional contínuo e gestão de relacionamento.",
+    "package3.li1":"Gestor de relacionamento dedicado para operações diárias",
+    "package3.li2":"Comunicação e coordenação transfronteiriça contínua",
+    "package3.li3":"Sincronização de contabilidade e consultoria fiscal",
+    "package3.li4":"Revisões estratégicas regulares de desempenho",
+    "package3.li5":"Suporte de escalabilidade e expansão de marca",
+    "process.kicker":"Como funciona","process.h2":"Um caminho claro e transparente para o crescimento global.",
+    "p1.title":"Descoberta.","p1.text":"Uma consulta inicial para compreender os seus objetivos de negócios e mercados-alvo.",
+    "p2.title":"Estratégia e Conexão.","p2.text":"Desenhamos o seu roteiro de expansão e conectamo-lo com os parceiros certos.",
+    "p3.title":"Execução e Escala.","p3.text":"Tratamos da implementação e apoiamos o crescimento contínuo do seu negócio.",
+    "team.kicker":"Quem está por trás","team.h2":"Com raízes em Portugal, conectados em toda a Ásia.",
+    "team.text":"Okaerinasai é operado por uma equipa experiente baseada em Lisboa, com profundas conexões no Japão e mercados asiáticos mais amplos. Trabalhamos em estreita colaboração com parceiros legais, fiscais e corporativos licenciados para garantir que cada empreendimento seja juridicamente seguro e culturalmente alinhado.",
+    "faq.kicker":"Questões","faq.h2":"Tudo o que precisa de saber para começar.",
+    "faq1.q":"Com que tipo de empresas trabalham?","faq1.a":"Trabalhamos com empreendedores, PMEs, criadores e empresas consolidadas que procuram expandir ou estabelecer operações entre os mercados asiáticos e Portugal/Europa.",
+    "faq2.q":"Como ajudam a construir relações entre a Ásia e a Europa?","faq2.a":"Superamos barreiras linguísticas, culturais e regulatórias atuando como seu representante local dedicado, negociando em seu nome e introduzindo parceiros estratégicos verificados.",
+    "faq3.q":"Lidam diretamente com questões jurídicas e fiscais?","faq3.a":"Coordenamos o processo prático e a estratégia. A representação jurídica formal, pedidos de vistos e serviços de consultoria fiscal são prestados diretamente pelos nossos advogados e contabilistas parceiros licenciados.",
+    "faq4.q":"Quanto tempo demora um projeto de expansão internacional?","faq4.a":"Os prazos variam consoante o âmbito — desde algumas semanas para estudos de viabilidade e matching de parceiros até vários meses para configurações corporativas completas e processamento de vistos.",
+    "contact.kicker":"Começar","contact.h2":"Agende a sua consulta gratuita.",
+    "contact.p":"Conte-nos sobre o seu negócio e objetivos de expansão internacional. Responderemos no prazo de dois dias úteis.",
+    "label.name":"Nome / Nome da Empresa","label.email":"E-mail","label.business":"Qual é o foco ou projeto do seu negócio?","label.timeline":"Qual é o seu prazo pretendido?",
+    "opt1":"Dentro de 6 meses","opt2":"6–12 meses","opt3":"Apenas a explorar","label.message":"Mais alguma coisa que devamos saber?","btn.submit":"Solicitar consulta",
+    "label.consent":"As informações submetidas são usadas apenas para responder à sua consulta e são processadas em conformidade com o RGPD da UE",
+    "name.placeholder":"O seu nome ou empresa","business.placeholder":"Ex: Expansão do Japão para Portugal","message.placeholder":"Opcional (máx. 500 caracteres)",
+    "footer.disclaimer":"Okaerinasai fornece consultoria de estratégia de negócios, gestão de expansão internacional e coordenação de projetos transfronteiriços. Serviços formais de representação jurídica, imigração e consultoria fiscal são prestados pelos nossos parceiros portugueses licenciados.",
+    "footer.copy":"© 2026 Okaerinasai. Lisboa, Portugal."
+  },
+  en: {
+    "nav.services":"Services","nav.process":"Process","nav.about":"About","nav.faq":"FAQ","nav.contact":"Contact",
+    "hero.h1":"Empowering business growth by bridging Asia and Europe.",
+    "hero.lead":"We help companies scale, expand internationally, and forge strong cross-border partnerships between Asian markets and Portugal.",
+    "hero.ctaPrimary":"Book a consultation","hero.ctaGhost":"Explore our services",
+    "about.kicker":"The Cross-Border Advantage","about.h2":"Building strong relationships across two dynamic worlds.",
+    "about.p":"True business expansion relies on trust, local expertise, and meaningful relationships. Based in Lisbon with deep ties across Asian markets, we serve as your strategic partner for international growth, market entry, and bilateral collaboration.",
+    "fact1.label":"Strategic bridge connecting Asian and European enterprises",
+    "fact2.label":"Gateway to European markets anchored in Portugal",
+    "fact3.label":"Bilingual management, legal, and operational support",
+    "services.kicker":"Services","services.h2":"Comprehensive support for international expansion.",
+    "services.p":"Whether you are bringing an Asian business into Europe or expanding a European enterprise into Asia, our bilingual team and licensed partners guide every stage.",
+    "package1.title":"Market Feasibility &amp; Strategy","package1.tagline":"Evaluate opportunities and build a solid roadmap before entering a new market.",
+    "package1.li1":"Bilateral market viability assessment",
+    "package1.li2":"Strategic business planning and roadmap design",
+    "package1.li3":"Regulatory and compliance overview",
+    "package1.li4":"One-on-one expert consultation",
+    "package2.title":"Cross-Border Partnership &amp; Setup","package2.tagline":"Establish your corporate entity and forge powerful relationships with local partners.",
+    "package2.li1":"Company incorporation and corporate setup support",
+    "package2.li2":"Strategic partner matching and network introductions",
+    "package2.li3":"Bilingual contract negotiation and coordination",
+    "package2.li4":"Legal and accounting setup with licensed local partners",
+    "package2.li5":"Full guidance through administrative milestones",
+    "package3.title":"Ongoing Growth &amp; Management","package3.tagline":"Sustain your expansion with continuous operational support and relationship management.",
+    "package3.li1":"Dedicated relationship manager for daily operations",
+    "package3.li2":"Ongoing cross-border communication and coordination",
+    "package3.li3":"Bookkeeping and tax advisory synchronization",
+    "package3.li4":"Regular strategic performance reviews",
+    "package3.li5":"Expansion scaling and brand scaling support",
+    "process.kicker":"How it works","process.h2":"A clear, transparent path to global growth.",
+    "p1.title":"Discovery.","p1.text":"An initial consultation to understand your business goals and target markets.",
+    "p2.title":"Strategy &amp; Connection.","p2.text":"We design your expansion roadmap and connect you with the right partners.",
+    "p3.title":"Execution &amp; Scale.","p3.text":"We handle the implementation and support your ongoing business growth.",
+    "team.kicker":"Who's behind this","team.h2":"Rooted in Portugal, connected across Asia.",
+    "team.text":"Okaerinasai is operated by an experienced team based in Lisbon with deep connections in Japan and broader Asian markets. We work closely with licensed legal, tax, and corporate partners to ensure every business venture is legally sound, culturally aligned, and built for long-term success.",
+    "faq.kicker":"Questions","faq.h2":"Everything you need to know to get started.",
+    "faq1.q":"What kind of businesses do you work with?","faq1.a":"We work with entrepreneurs, SMEs, creators, and established corporations looking to expand or establish operations between Asian markets and Portugal/Europe.",
+    "faq2.q":"How do you help build relationships between Asia and Europe?","faq2.a":"We bridge language, cultural, and regulatory barriers by acting as your dedicated local liaison, negotiating on your behalf, and introducing vetted strategic partners.",
+    "faq3.q":"Do you handle legal and tax matters directly?","faq3.a":"We coordinate the practical process and strategy. Formal legal representation, visa filings, and tax advisory services are provided directly by our licensed partner attorneys and accountants.",
+    "faq4.q":"How long does an international expansion project take?","faq4.a":"Timelines vary based on scope—ranging from a few weeks for feasibility studies and partner matching to several months for full corporate setups and visa processing.",
+    "contact.kicker":"Get started","contact.h2":"Book your free consultation.",
+    "contact.p":"Tell us about your business and your international expansion goals. We'll reply within two business days.",
+    "label.name":"Name / Company Name","label.email":"Email","label.business":"What is your business focus or project?","label.timeline":"What is your target timeline?",
+    "opt1":"Within 6 months","opt2":"6–12 months","opt3":"Just exploring","label.message":"Anything else we should know?","btn.submit":"Request a consultation",
+    "label.consent":"Information you submit is used only to respond to your enquiry and is processed in accordance with EU GDPR",
+    "name.placeholder":"Your name or company","business.placeholder":"e.g. Expanding from Japan to Portugal","message.placeholder":"Optional (max 500 chars)",
+    "footer.disclaimer":"Okaerinasai provides business strategy consulting, international expansion management, and cross-border project coordination. Formal legal representation, immigration filings, and tax advisory services are provided by our licensed Portuguese partners. Outcomes depend on individual client circumstances.",
+    "footer.copy":"© 2026 Okaerinasai. Lisbon, Portugal."
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(translations[lang][key] !== undefined){ el.innerHTML = translations[lang][key]; }
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var key = el.getAttribute('data-i18n-placeholder');
+    if(translations[lang][key] !== undefined){ el.placeholder = translations[lang][key]; }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  document.getElementById('navlist').classList.remove('open');
+}
+
+// Auto-close mobile navigation when a section link is tapped
+document.querySelectorAll('#navlist a').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navlist').classList.remove('open');
+  });
+});
+
+// Character Counter for Message Textarea
+const messageInput = document.getElementById("message");
+const charCount = document.getElementById("char-count");
+
+if (messageInput && charCount) {
+  messageInput.addEventListener("input", function() {
+    charCount.textContent = `${this.value.length}/500`;
+  });
+}
+
+// AJAX Form Submission for Formspree
+const form = document.getElementById("consultation-form");
+const status = document.getElementById("form-status");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const data = new FormData(form);
+  const currentLang = document.documentElement.lang || 'en';
+  
+  if (currentLang === 'ja') {
+    status.textContent = "送信中...";
+  } else if (currentLang === 'pt') {
+    status.textContent = "A enviar...";
+  } else {
+    status.textContent = "Sending...";
+  }
+  
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      if (currentLang === 'ja') {
+        status.textContent = "送信が完了しました。2営業日以内にご連絡いたします。";
+      } else if (currentLang === 'pt') {
+        status.textContent = "Obrigado! O seu pedido foi enviado. Responderemos em dois dias úteis.";
+      } else {
+        status.textContent = "Thank you! Your request has been sent. We'll reply within two business days.";
+      }
+      form.reset();
+      if (charCount) charCount.textContent = "0/500";
+    } else {
+      const errorData = await response.json();
+      if (Object.hasOwn(errorData, 'errors')) {
+        status.textContent = errorData["errors"].map(error => error["message"]).join(", ");
+      } else {
+        status.textContent = currentLang === 'ja' 
+          ? "送信エラーが発生しました。再度お試しください。" 
+          : currentLang === 'pt' 
+          ? "Ocorreu um erro ao enviar o formulário. Tente novamente." 
+          : "Oops! There was a problem submitting your form.";
+      }
+    }
+  } catch (error) {
+    status.textContent = currentLang === 'ja' 
+      ? "通信エラーが発生しました。時間を置いて再度お試しください。" 
+      : currentLang === 'pt' 
+      ? "Erro de rede. Por favor, tente novamente mais tarde." 
+      : "Oops! Network error. Please try again later.";
+  }
+});
+</script>
+
+</body>
+</html>
