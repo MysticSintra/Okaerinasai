@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Okaerinasai — Bridging Business Between Asia and Europe</title>
+<title>Okaerinasai — Bridging Business Between Portugal and Japan</title>
 
 <!-- Favicon & Device Icons -->
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -63,7 +63,7 @@
     border-bottom:1px solid var(--line);
   }
   
-  /* Top Block: Logo & Language Switcher */
+  /* Top Block: Logo & Right Controls */
   .nav-top{
     display:flex;align-items:center;justify-content:space-between;
     padding:14px 24px;max-width:1040px;margin:0 auto;
@@ -74,7 +74,7 @@
   }
   .brand .jp{font-family:'Noto Sans JP',sans-serif;font-size:0.6em;color:var(--ink-soft);margin-left:8px;font-weight:400;}
   
-  .nav-top-right{display:flex;align-items:center;gap:16px;}
+  .nav-top-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;}
   .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink);}
 
   .lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex-shrink:0;}
@@ -84,6 +84,19 @@
   }
   .lang-btn.active{background:var(--azulejo);color:var(--paper);}
   .lang-btn:not(.active):hover{background:var(--paper-deep);color:var(--ink);}
+
+  /* Ecosystem Subdomain Links (Top Right) */
+  .subdomain-links{
+    display:flex;gap:10px;align-items:center;font-size:0.82rem;
+  }
+  .subdomain-links a{
+    text-decoration:none;color:var(--azulejo);font-weight:500;
+    padding:4px 8px;border:1px solid var(--line);border-radius:2px;background:var(--paper);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .subdomain-links a:hover{
+    background:var(--azulejo);color:var(--paper);border-color:var(--azulejo);
+  }
 
   /* Second Block: Navigation Menu (Left to Right) */
   .nav-bar{
@@ -104,7 +117,8 @@
   }
   nav a:hover{color:var(--azulejo);}
 
-  @media (max-width:760px){
+  @media (max-width:820px){
+    .subdomain-links{display:none;} /* Hidden on very small screens, can be accessed via footer/nav if needed */
     .nav-bar{position:relative;}
     nav ul{
       display:none;position:absolute;top:100%;left:0;right:0;
@@ -175,12 +189,6 @@
   .trust-box{background:var(--paper-deep);border:1px solid var(--line);padding:30px;max-width:var(--max);}
   .trust-box p{color:var(--ink-soft);margin:0;}
 
-  .faq-item{border-top:1px solid var(--line);padding:20px 0;max-width:var(--max);}
-  .faq-item h3{font-size:1.02rem;font-weight:600;font-family:'IBM Plex Sans',sans-serif;margin-bottom:8px;}
-  html[lang="ja"] .faq-item h3{font-family:'Noto Sans JP',sans-serif;}
-  .faq-item p{color:var(--ink-soft);margin:0;}
-  .faq-item:last-child{border-bottom:1px solid var(--line);}
-
   .contact{background:var(--azulejo-deep);color:var(--paper);}
   .contact .section-head h2{color:var(--paper);}
   .contact .section-head p{color:#C9D6E4;}
@@ -208,16 +216,24 @@
 <body>
 
 <header>
-  <!-- Top Block: Brand Logo & Language Switcher -->
+  <!-- Top Block: Brand Logo, Language Switcher & Subdomain Redirects -->
   <div class="nav-top">
     <div class="brand">Okaerinasai<span class="jp">お帰りなさい</span></div>
     <div class="nav-top-right">
-      <div class="lang-switch">
-        <button class="lang-btn active" data-lang="en" onclick="applyLang('en')">EN</button>
-        <button class="lang-btn" data-lang="ja" onclick="applyLang('ja')">日本語</button>
-        <button class="lang-btn" data-lang="pt" onclick="applyLang('pt')">PT</button>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en" onclick="applyLang('en')">EN</button>
+          <button class="lang-btn" data-lang="ja" onclick="applyLang('ja')">日本語</button>
+          <button class="lang-btn" data-lang="pt" onclick="applyLang('pt')">PT</button>
+        </div>
+        <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">☰</button>
       </div>
-      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">☰</button>
+      <!-- Subdomain Redirection Links -->
+      <div class="subdomain-links">
+        <a href="https://expandjp.okaerinasai.eu" data-i18n="sub.portugal">Welcome to Portugal</a>
+        <a href="https://expandpt.okaerinasai.eu" data-i18n="sub.japan">Welcome to Japan</a>
+        <a href="https://creators.okaerinasai.eu" data-i18n="sub.creators">Creators</a>
+      </div>
     </div>
   </div>
 
@@ -228,7 +244,6 @@
         <li><a href="#services" data-i18n="nav.services">Services</a></li>
         <li><a href="#process" data-i18n="nav.process">Process</a></li>
         <li><a href="#about-team" data-i18n="nav.about">About</a></li>
-        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </nav>
@@ -241,11 +256,11 @@
       <path d="M20,70 C 100,10 240,10 320,70" fill="none" stroke="#1E4470" stroke-width="1.5"/>
       <circle cx="20" cy="70" r="5" fill="#A63A2E"/>
       <circle cx="320" cy="70" r="5" fill="#1E4470"/>
-      <text x="20" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Asia</text>
-      <text x="320" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Portugal / Europe</text>
+      <text x="20" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Japan</text>
+      <text x="320" y="86" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#4A4A47" text-anchor="middle">Portugal</text>
     </svg>
-    <h1 data-i18n="hero.h1">Empowering business growth by bridging Asia and Europe.</h1>
-    <p class="lead" data-i18n="hero.lead">We help companies scale, expand internationally, and forge strong cross-border partnerships between Asian markets and Portugal.</p>
+    <h1 data-i18n="hero.h1">Empowering business growth by bridging Portugal and Japan.</h1>
+    <p class="lead" data-i18n="hero.lead">We help companies scale, expand internationally, and forge strong cross-border partnerships between Japanese markets and Portugal.</p>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary" data-i18n="hero.ctaPrimary">Book a consultation</a>
       <a href="#services" class="btn btn-ghost" data-i18n="hero.ctaGhost">Explore our services</a>
@@ -260,12 +275,12 @@
     <div class="section-head">
       <span class="kicker" data-i18n="about.kicker">The Cross-Border Advantage</span>
       <h2 data-i18n="about.h2">Building strong relationships across two dynamic worlds.</h2>
-      <p data-i18n="about.p">True business expansion relies on trust, local expertise, and meaningful relationships. Based in Lisbon with deep ties across Asian markets, we serve as your strategic partner for international growth, market entry, and bilateral collaboration.</p>
+      <p data-i18n="about.p">Based in Lisbon and with colleagues set in Japan, we serve as your strategic partner for international growth, market entry, and bilateral collaboration.</p>
     </div>
     <div class="facts">
       <div class="fact">
         <div class="num">2-Way</div>
-        <div class="label" data-i18n="fact1.label">Strategic bridge connecting Asian and European enterprises</div>
+        <div class="label" data-i18n="fact1.label">Strategic bridge connecting Portuguese and Japanese enterprises</div>
       </div>
       <div class="fact">
         <div class="num">EU</div>
@@ -286,19 +301,19 @@
     <div class="section-head">
       <span class="kicker" data-i18n="services.kicker">Services</span>
       <h2 data-i18n="services.h2">Comprehensive support for international expansion.</h2>
-      <p data-i18n="services.p">Whether you are bringing an Asian business into Europe or expanding a European enterprise into Asia, our bilingual team and licensed partners guide every stage.</p>
+      <p data-i18n="services.p">Whether you are expanding a Japanese venture into Portugal or introducing a Portuguese business to Japan, our dedicated team guides every stage.</p>
     </div>
 
     <div class="journey">
       <div class="journey-item">
         <div class="step-num">01</div>
         <div>
-          <h3 data-i18n="package1.title">Market Feasibility &amp; Strategy</h3>
-          <p class="tagline" data-i18n="package1.tagline">Evaluate opportunities and build a solid roadmap before entering a new market.</p>
+          <h3 data-i18n="package1.title">Portuguese Market Feasibility &amp; Strategy</h3>
+          <p class="tagline" data-i18n="package1.tagline">Evaluate opportunities and build a compliant roadmap together with our licensed legal and accounting partners.</p>
           <ul>
-            <li data-i18n="package1.li1">Bilateral market viability assessment</li>
-            <li data-i18n="package1.li2">Strategic business planning and roadmap design</li>
-            <li data-i18n="package1.li3">Regulatory and compliance overview</li>
+            <li data-i18n="package1.li1">Market viability and commercial assessment in Portugal</li>
+            <li data-i18n="package1.li2">Legal, visa, and regulatory structure alignment</li>
+            <li data-i18n="package1.li3">Strategic business planning for European entry</li>
             <li data-i18n="package1.li4">One-on-one expert consultation</li>
           </ul>
         </div>
@@ -307,14 +322,13 @@
       <div class="journey-item">
         <div class="step-num">02</div>
         <div>
-          <h3 data-i18n="package2.title">Cross-Border Partnership &amp; Setup</h3>
-          <p class="tagline" data-i18n="package2.tagline">Establish your corporate entity and forge powerful relationships with local partners.</p>
+          <h3 data-i18n="package2.title">Cross-Border Creator &amp; Influencer Program</h3>
+          <p class="tagline" data-i18n="package2.tagline">Expand your international brand reach through strategic partnerships with top content creators and influencers.</p>
           <ul>
-            <li data-i18n="package2.li1">Company incorporation and corporate setup support</li>
-            <li data-i18n="package2.li2">Strategic partner matching and network introductions</li>
-            <li data-i18n="package2.li3">Bilingual contract negotiation and coordination</li>
-            <li data-i18n="package2.li4">Legal and accounting setup with licensed local partners</li>
-            <li data-i18n="package2.li5">Full guidance through administrative milestones</li>
+            <li data-i18n="package2.li1">Targeted matching with influential digital creators</li>
+            <li data-i18n="package2.li2">Cross-cultural brand campaign strategy</li>
+            <li data-i18n="package2.li3">Bilingual contract coordination and deal management</li>
+            <li data-i18n="package2.li4">Localized social media audience growth</li>
           </ul>
         </div>
       </div>
@@ -323,13 +337,12 @@
         <div class="step-num">03</div>
         <div>
           <h3 data-i18n="package3.title">Ongoing Growth &amp; Management</h3>
-          <p class="tagline" data-i18n="package3.tagline">Sustain your expansion with continuous operational support and relationship management.</p>
+          <p class="tagline" data-i18n="package3.tagline">Sustain your international expansion with continuous operational support and relationship management.</p>
           <ul>
             <li data-i18n="package3.li1">Dedicated relationship manager for daily operations</li>
-            <li data-i18n="package3.li2">Ongoing cross-border communication and coordination</li>
-            <li data-i18n="package3.li3">Bookkeeping and tax advisory synchronization</li>
-            <li data-i18n="package3.li4">Regular strategic performance reviews</li>
-            <li data-i18n="package3.li5">Expansion scaling and brand scaling support</li>
+            <li data-i18n="package3.li2">Ongoing cross-border communication between Portugal and Japan</li>
+            <li data-i18n="package3.li3">Strategic performance reviews and market adaptation</li>
+            <li data-i18n="package3.li4">Brand expansion and scaling support</li>
           </ul>
         </div>
       </div>
@@ -348,15 +361,15 @@
     <div class="process-grid">
       <div class="p-item">
         <div class="num">1</div>
-        <p><strong data-i18n="p1.title">Discovery.</strong> <span data-i18n="p1.text">An initial consultation to understand your business goals and target markets.</span></p>
+        <p><strong data-i18n="p1.title">Discovery.</strong> <span data-i18n="p1.text">An initial consultation to understand your business goals across Portugal and Japan.</span></p>
       </div>
       <div class="p-item">
         <div class="num">2</div>
-        <p><strong data-i18n="p2.title">Strategy &amp; Connection.</strong> <span data-i18n="p2.text">We design your expansion roadmap and connect you with the right partners.</span></p>
+        <p><strong data-i18n="p2.title">Strategy &amp; Connection.</strong> <span data-i18n="p2.text">We design your expansion roadmap and connect you with local partners or creators.</span></p>
       </div>
       <div class="p-item">
         <div class="num">3</div>
-        <p><strong data-i18n="p3.title">Execution &amp; Scale.</strong> <span data-i18n="p3.text">We handle the implementation and support your ongoing business growth.</span></p>
+        <p><strong data-i18n="p3.title">Execution &amp; Scale.</strong> <span data-i18n="p3.text">We handle the coordination and support your ongoing business growth.</span></p>
       </div>
     </div>
   </div>
@@ -368,37 +381,10 @@
   <div class="wrap">
     <div class="section-head">
       <span class="kicker" data-i18n="team.kicker">Who's behind this</span>
-      <h2 data-i18n="team.h2">Rooted in Portugal, connected across Asia.</h2>
+      <h2 data-i18n="team.h2">Rooted in Portugal, connected in Japan.</h2>
     </div>
     <div class="trust-box">
-      <p data-i18n="team.text">Okaerinasai is operated by an experienced team based in Lisbon with deep connections in Japan and broader Asian markets. We work closely with licensed legal, tax, and corporate partners to ensure every business venture is legally sound, culturally aligned, and built for long-term success.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="dot"></span></div>
-
-<section id="faq">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker" data-i18n="faq.kicker">Questions</span>
-      <h2 data-i18n="faq.h2">Everything you need to know to get started.</h2>
-    </div>
-    <div class="faq-item">
-      <h3 data-i18n="faq1.q">What kind of businesses do you work with?</h3>
-      <p data-i18n="faq1.a">We work with entrepreneurs, SMEs, creators, and established corporations looking to expand or establish operations between Asian markets and Portugal/Europe.</p>
-    </div>
-    <div class="faq-item">
-      <h3 data-i18n="faq2.q">How do you help build relationships between Asia and Europe?</h3>
-      <p data-i18n="faq2.a">We bridge language, cultural, and regulatory barriers by acting as your dedicated local liaison, negotiating on your behalf, and introducing vetted strategic partners.</p>
-    </div>
-    <div class="faq-item">
-      <h3 data-i18n="faq3.q">Do you handle legal and tax matters directly?</h3>
-      <p data-i18n="faq3.a">We coordinate the practical process and strategy. Formal legal representation, visa filings, and tax advisory services are provided directly by our licensed partner attorneys and accountants.</p>
-    </div>
-    <div class="faq-item">
-      <h3 data-i18n="faq4.q">How long does an international expansion project take?</h3>
-      <p data-i18n="faq4.a">Timelines vary based on scope—ranging from a few weeks for feasibility studies and partner matching to several months for full corporate setups and visa processing.</p>
+      <p data-i18n="team.text">Okaerinasai.eu is operated by an experienced team based in Lisbon with strong connections in Japan. We help businesses and creators to expand and amplify the Portugal - Japan relationship.</p>
     </div>
   </div>
 </section>
@@ -408,7 +394,7 @@
     <div class="section-head">
       <span class="kicker" data-i18n="contact.kicker">Get started</span>
       <h2 data-i18n="contact.h2">Book your free consultation.</h2>
-      <p data-i18n="contact.p">Tell us about your business and your international expansion goals. We'll reply within two business days.</p>
+      <p data-i18n="contact.p">Tell us about your business and your goals between Portugal and Japan. We'll reply within two business days.</p>
     </div>
     <form id="consultation-form" action="https://formspree.io/f/xzezrylk" method="POST">
       <div>
@@ -458,47 +444,43 @@
 <script>
 const translations = {
   ja: {
-    "nav.services":"サービス","nav.process":"流れ","nav.about":"会社概要","nav.faq":"よくある質問","nav.contact":"お問い合わせ",
-    "hero.h1":"アジアとヨーロッパを繋ぎ、ビジネスの成長を加速させる。",
-    "hero.lead":"私たちは、アジア市場とポルトガルの間で強固な関係を築き、企業のスケーリングや国際展開をトータルでサポートします。",
+    "nav.services":"サービス","nav.process":"流れ","nav.about":"会社概要","nav.contact":"お問い合わせ",
+    "sub.portugal":"ポルトガルへようこそ",
+    "sub.japan":"日本へようこそ",
+    "sub.creators":"クリエイター",
+    "hero.h1":"ポルトガルと日本を繋ぎ、ビジネスの成長を加速させる。",
+    "hero.lead":"私たちは、日本市場とポルトガルの間で強固な関係を築き、企業のスケーリングや国際展開をトータルでサポートします。",
     "hero.ctaPrimary":"無料相談を予約する","hero.ctaGhost":"サービスを見る",
     "about.kicker":"クロスボーダーの強み","about.h2":"2つのダイナミックな世界を結ぶ、強固なパートナーシップ。",
-    "about.p":"真のビジネス拡大には、信頼、現地の専門知識、そして意義深い関係性が不可欠です。リスボンを拠点としアジア市場に深いネットワークを持つ私たちは、国際的な成長、市場参入、二国間協力を実現する戦略的パートナーです。",
-    "fact1.label":"アジアとヨーロッパの企業を結ぶ双方向の戦略的ブリッジ",
+    "about.p":"リスボンを拠点とし、日本にもメンバーを配する私たちは、国際的な成長、市場参入、二国間協力を実現する戦略的パートナーです。",
+    "fact1.label":"ポルトガルと日本の企業を結ぶ双方向の戦略的ブリッジ",
     "fact2.label":"ポルトガルを拠点とした欧州市場へのゲートウェイ",
     "fact3.label":"バイリンガルによる経営、法務、および運営サポート",
     "services.kicker":"サービス","services.h2":"国際展開のための包括的なサポート。",
-    "services.p":"アジア企業をヨーロッパへ進出させる場合でも、ヨーロッパ企業をアジアへ拡大させる場合でも、バイリンガルチームと提携専門家があらゆる段階を導きます。",
-    "package1.title":"市場調査・事業戦略策定","package1.tagline":"新しい市場へ参入する前に、機会を評価し確実なロードマップを構築します。",
-    "package1.li1":"二国間市場の実現可能性評価",
-    "package1.li2":"戦略的事業計画およびロードマップの設計",
-    "package1.li3":"規制およびコンプライアンスの概要把握",
+    "services.p":"日本の事業をポルトガルへ進出させる場合でも、ポルトガル企業を日本へ拡大させる場合でも、専任チームがあらゆる段階を導きます。",
+    "package1.title":"ポルトガル市場の実現可能性評価・戦略策定","package1.tagline":"有資格の法務・会計パートナーとともに機会を評価し、コンプライアンスに沿ったロードマップを構築します。",
+    "package1.li1":"ポルトガルにおける市場の実現可能性および商業評価",
+    "package1.li2":"法務、ビザ、および規制構造のアライメント",
+    "package1.li3":"欧州参入に向けた戦略的事業計画",
     "package1.li4":"専門家による個別コンサルティング",
-    "package2.title":"クロスボーダー提携・法人設立","package2.tagline":"法人を設立し、現地のパートナーと強力な関係を構築します。",
-    "package2.li1":"会社設立およびコーポレートセットアップのサポート",
-    "package2.li2":"戦略的パートナーのマッチングとネットワーク紹介",
-    "package2.li3":"バイリンガルによる契約交渉と調整",
-    "package2.li4":"地元の有資格パートナーによる法務・会計の整備",
-    "package2.li5":"行政手続きにおける完全な伴走支援",
-    "package3.title":"継続的な成長・経営管理サポート","package3.tagline":"継続的な運営サポートと関係管理により、拡大を維持・発展させます。",
+    "package2.title":"クロスボーダー・クリエイター &amp; インフルエンサープログラム","package2.tagline":"トップコンテンツクリエイターやインフルエンサーとの戦略的パートナーシップを通じ、ブランドの国際的リーチを拡大します。",
+    "package2.li1":"影響力のあるデジタルクリエイターとのターゲットマッチング",
+    "package2.li2":"異文化に対応したブランドキャンペーン戦略",
+    "package2.li3":"バイリンガルによる契約交渉および案件管理",
+    "package2.li4":"ローカライズされたSNSオーディエンスの成長支援",
+    "package3.title":"継続的な成長・マネジメントサポート","package3.tagline":"継続的な運営サポートと関係管理により、国際的な拡大を維持・発展させます。",
     "package3.li1":"日々の運営を支える専任マネージャーの配置",
-    "package3.li2":"継続的なクロスボーダーのコミュニケーションと調整",
-    "package3.li3":"記帳および税務アドバイザリーの同期化",
-    "package3.li4":"定期的な戦略的パフォーマンスレビュー",
-    "package3.li5":"事業拡大およびブランドスケーリングの支援",
+    "package3.li2":"ポルトガルと日本間の継続的なコミュニケーション調整",
+    "package3.li3":"定期的な戦略的パフォーマンスレビューと市場適応",
+    "package3.li4":"事業拡大およびブランドスケーリングの支援",
     "process.kicker":"ご利用の流れ","process.h2":"グローバル展開への明確で透明な道筋。",
-    "p1.title":"ディスカバリー。","p1.text":"貴社のビジネス目標とターゲット市場を把握するための初回相談。",
-    "p2.title":"戦略と接続。","p2.text":"展開ロードマップを設計し、最適なパートナーとお引き合わせします。",
-    "p3.title":"実行とスケール。","p3.text":"実務の実行を代行し、継続的なビジネスの成長をサポートします。",
-    "team.kicker":"運営チームについて","team.h2":"ポルトガルに根ざし、アジア全体とつながる。",
-    "team.text":"Okaerinasaiは、リスボンを拠点とし日本やアジア市場に深いネットワークを持つ経験豊富なチームによって運営されています。法務・税務・企業の有資格パートナーと密に連携し、すべての事業が法的基盤を持ち、文化的にも適合した長期的な成功を収めるようサポートします。",
-    "faq.kicker":"よくあるご質問","faq.h2":"始める前に知っておきたいこと。",
-    "faq1.q":"どのような企業と協業していますか？","faq1.a":"アジア市場とポルトガル・ヨーロッパの間で事業拡大や拠点設立を目指す起業家、中小企業、クリエイター、大手企業と協業しています。",
-    "faq2.q":"アジアとヨーロッパの間の関係構築をどのようにサポートしますか？","faq2.a":"専任のローカルリエゾンとして言語・文化・規制の壁を解消し、交渉の代行や厳選された戦略的パートナーのご紹介を行います。",
-    "faq3.q":"法務や税務に関する事項は直接担当しますか？","faq3.a":"実務プロセスや戦略の調整を担当します。正式な法的代理、ビザ申請、税務アドバイザリーサービスは、有資格の提携弁護士および会計士が直接提供します。",
-    "faq4.q":"国際展開プロジェクトにはどれくらいの時間がかかりますか？","faq4.a":"期間はスコープによって異なります。調査やパートナーマッチングの数週間から、法人設立やビザ処理を含める数ヶ月まで様々です。",
+    "p1.title":"ディスカバリー。","p1.text":"ポルトガルと日本における貴社のビジネス目標を把握するための初回相談。",
+    "p2.title":"戦略と接続。","p2.text":"展開ロードマップを設計し、現地のパートナーやクリエイターとお引き合わせします。",
+    "p3.title":"実行とスケール。","p3.text":"実務の調整を代行し、継続的なビジネスの成長をサポートします。",
+    "team.kicker":"運営チームについて","team.h2":"ポルトガルに根ざし、日本と深くつながる。",
+    "team.text":"Okaerinasai.euは、リスボンを拠点とし日本に強いネットワークを持つ経験豊富なチームによって運営されています。私たちは企業やクリエイターの進出を支援し、ポルトガルと日本の関係をより一層強固なものにします。",
     "contact.kicker":"お問い合わせ","contact.h2":"無料相談のご予約。",
-    "contact.p":"貴社のビジネスや国際展開の目標についてお聞かせください。2営業日以内にご返信いたします。",
+    "contact.p":"ポルトガルと日本の間でのビジネスや目標についてお聞かせください。2営業日以内にご返信いたします。",
     "label.name":"お名前 / 企業名","label.email":"メールアドレス","label.business":"事業の焦点またはプロジェクト内容","label.timeline":"目標とする時期は？",
     "opt1":"6ヶ月以内","opt2":"6〜12ヶ月","opt3":"検討段階","label.message":"その他、お伝えいただきたいこと","btn.submit":"相談を予約する",
     "label.consent":"送信いただいた情報は、ご相談への対応のみに使用され、EU GDPR（EU一般データ保護規則）に準拠して処理されます。",
@@ -507,47 +489,43 @@ const translations = {
     "footer.copy":"© 2026 Okaerinasai. リスボン、ポルトガル。"
   },
   pt: {
-    "nav.services":"Serviços","nav.process":"Processo","nav.about":"Sobre","nav.faq":"FAQ","nav.contact":"Contato",
-    "hero.h1":"Impulsionando o crescimento empresarial conectando a Ásia e a Europa.",
-    "hero.lead":"Ajudamos empresas a escalar, expandir internacionalmente e forjar parcerias transfronteiriças sólidas entre os mercados asiáticos e Portugal.",
+    "nav.services":"Serviços","nav.process":"Processo","nav.about":"Sobre","nav.contact":"Contato",
+    "sub.portugal":"Bem-vindo a Portugal",
+    "sub.japan":"Bem-vindo ao Japão",
+    "sub.creators":"Criadores",
+    "hero.h1":"Impulsionando o crescimento empresarial conectando Portugal e o Japão.",
+    "hero.lead":"Ajudamos empresas a escalar, expandir internacionalmente e forjar parcerias transfronteiriças sólidas entre os mercados japoneses e Portugal.",
     "hero.ctaPrimary":"Agendar Consulta","hero.ctaGhost":"Explorar serviços",
     "about.kicker":"A Vantagem Transfronteiriça","about.h2":"Construindo fortes relações entre dois mundos dinâmicos.",
-    "about.p":"A verdadeira expansão empresarial baseia-se na confiança, experiência local e em relações significativas. Com sede em Lisboa e fortes ligações aos mercados asiáticos, atuamos como seu parceiro estratégico para o crescimento internacional, entrada no mercado e colaboração bilateral.",
-    "fact1.label":"Ponte estratégica bilateral conectando empresas asiáticas e europeias",
+    "about.p":"Com sede em Lisboa e colegas sediados no Japão, atuamos como seu parceiro estratégico para o crescimento internacional, entrada no mercado e colaboração bilateral.",
+    "fact1.label":"Ponte estratégica bilateral conectando empresas portuguesas e japonesas",
     "fact2.label":"Gateway para os mercados europeus ancorado em Portugal",
     "fact3.label":"Gestão bilíngue, suporte jurídico e operacional completo",
     "services.kicker":"Serviços","services.h2":"Suporte abrangente para expansão internacional.",
-    "services.p":"Quer esteja a trazer um negócio asiático para a Europa ou a expandir uma empresa europeia para a Ásia, a nossa equipa bilíngue e parceiros licenciados orientam cada etapa.",
-    "package1.title":"Viabilidade de Mercado e Estratégia","package1.tagline":"Avalie oportunidades e construa um roteiro sólido antes de entrar num novo mercado.",
-    "package1.li1":"Avaliação bilateral da viabilidade de mercado",
-    "package1.li2":"Planeamento estratégico de negócios e design de roteiro",
-    "package1.li3":"Visão geral regulatória e de conformidade",
+    "services.p":"Quer esteja a expandir um negócio japonês para Portugal ou a apresentar uma empresa portuguesa ao Japão, a nossa equipa dedicada orienta cada etapa.",
+    "package1.title":"Viabilidade do Mercado Português e Estratégia","package1.tagline":"Avalie oportunidades e construa um plano em conformidade juntamente com os nossos parceiros jurídicos e contabilísticos licenciados.",
+    "package1.li1":"Viabilidade de mercado e avaliação comercial em Portugal",
+    "package1.li2":"Alinhamento da estrutura jurídica, de vistos e regulamentar",
+    "package1.li3":"Planeamento estratégico de negócios para entrada na Europa",
     "package1.li4":"Consulta especializada individualizada",
-    "package2.title":"Parceria Transfronteiriça e Estruturação","package2.tagline":"Estabeleça a sua entidade corporativa e crie parcerias poderosas com atores locais.",
-    "package2.li1":"Constituição de empresas e suporte de configuração corporativa",
-    "package2.li2":"Matching de parceiros estratégicos e introduções na rede",
-    "package2.li3":"Negociação de contratos bilíngues e coordenação",
-    "package2.li4":"Configuração jurídica e contabilística com parceiros locais licenciados",
-    "package2.li5":"Orientação completa através de marcos administrativos",
-    "package3.title":"Crescimento Contínuo e Gestão","package3.tagline":"Sustente a sua expansão com suporte operacional contínuo e gestão de relacionamento.",
+    "package2.title":"Programa Transfronteiriço de Criadores e Influenciadores","package2.tagline":"Expanda o alcance internacional da sua marca através de parcerias estratégicas com os principais criadores de conteúdo e influenciadores.",
+    "package2.li1":"Matching direcionado com criadores digitais influentes",
+    "package2.li2":"Estratégia de campanha de marca intercultural",
+    "package2.li3":"Coordenação bilíngue de contratos e gestão de acordos",
+    "package2.li4":"Crescimento de audiência localizado nas redes sociais",
+    "package3.title":"Crescimento Contínuo e Gestão","package3.tagline":"Sustente a sua expansão internacional com suporte operacional contínuo e gestão de relacionamento.",
     "package3.li1":"Gestor de relacionamento dedicado para operações diárias",
-    "package3.li2":"Comunicação e coordenação transfronteiriça contínua",
-    "package3.li3":"Sincronização de contabilidade e consultoria fiscal",
-    "package3.li4":"Revisões estratégicas regulares de desempenho",
-    "package3.li5":"Suporte de escalabilidade e expansão de marca",
+    "package3.li2":"Comunicação transfronteiriça contínua entre Portugal e o Japão",
+    "package3.li3":"Revisões estratégicas de desempenho e adaptação ao mercado",
+    "package3.li4":"Suporte de expansão e escalabilidade de marca",
     "process.kicker":"Como funciona","process.h2":"Um caminho claro e transparente para o crescimento global.",
-    "p1.title":"Descoberta.","p1.text":"Uma consulta inicial para compreender os seus objetivos de negócios e mercados-alvo.",
-    "p2.title":"Estratégia e Conexão.","p2.text":"Desenhamos o seu roteiro de expansão e conectamo-lo com os parceiros certos.",
-    "p3.title":"Execução e Escala.","p3.text":"Tratamos da implementação e apoiamos o crescimento contínuo do seu negócio.",
-    "team.kicker":"Quem está por trás","team.h2":"Com raízes em Portugal, conectados em toda a Ásia.",
-    "team.text":"Okaerinasai é operado por uma equipa experiente baseada em Lisboa, com profundas conexões no Japão e mercados asiáticos mais amplos. Trabalhamos em estreita colaboração com parceiros legais, fiscais e corporativos licenciados para garantir que cada empreendimento seja juridicamente seguro e culturalmente alinhado.",
-    "faq.kicker":"Questões","faq.h2":"Tudo o que precisa de saber para começar.",
-    "faq1.q":"Com que tipo de empresas trabalham?","faq1.a":"Trabalhamos com empreendedores, PMEs, criadores e empresas consolidadas que procuram expandir ou estabelecer operações entre os mercados asiáticos e Portugal/Europa.",
-    "faq2.q":"Como ajudam a construir relações entre a Ásia e a Europa?","faq2.a":"Superamos barreiras linguísticas, culturais e regulatórias atuando como seu representante local dedicado, negociando em seu nome e introduzindo parceiros estratégicos verificados.",
-    "faq3.q":"Lidam diretamente com questões jurídicas e fiscais?","faq3.a":"Coordenamos o processo prático e a estratégia. A representação jurídica formal, pedidos de vistos e serviços de consultoria fiscal são prestados diretamente pelos nossos advogados e contabilistas parceiros licenciados.",
-    "faq4.q":"Quanto tempo demora um projeto de expansão internacional?","faq4.a":"Os prazos variam consoante o âmbito — desde algumas semanas para estudos de viabilidade e matching de parceiros até vários meses para configurações corporativas completas e processamento de vistos.",
+    "p1.title":"Descoberta.","p1.text":"Uma consulta inicial para compreender os seus objetivos de negócios entre Portugal e o Japão.",
+    "p2.title":"Estratégia e Conexão.","p2.text":"Desenhamos o seu plano de expansão e conectamo-lo com parceiros ou criadores locais.",
+    "p3.title":"Execução e Escala.","p3.text":"Tratamos da coordenação e apoiamos o crescimento contínuo do seu negócio.",
+    "team.kicker":"Quem está por trás","team.h2":"Com raízes em Portugal, conectados no Japão.",
+    "team.text":"Okaerinasai.eu é operado por uma equipa experiente baseada em Lisboa com fortes conexões no Japão. Ajudamos empresas e criadores a expandir e amplificar a relação entre Portugal e o Japão.",
     "contact.kicker":"Começar","contact.h2":"Agende a sua consulta gratuita.",
-    "contact.p":"Conte-nos sobre o seu negócio e objetivos de expansão internacional. Responderemos no prazo de dois dias úteis.",
+    "contact.p":"Conte-nos sobre o seu negócio e os seus objetivos entre Portugal e o Japão. Responderemos no prazo de dois dias úteis.",
     "label.name":"Nome / Nome da Empresa","label.email":"E-mail","label.business":"Qual é o foco ou projeto do seu negócio?","label.timeline":"Qual é o seu prazo pretendido?",
     "opt1":"Dentro de 6 meses","opt2":"6–12 meses","opt3":"Apenas a explorar","label.message":"Mais alguma coisa que devamos saber?","btn.submit":"Solicitar consulta",
     "label.consent":"As informações submetidas são usadas apenas para responder à sua consulta e são processadas em conformidade com o RGPD da UE",
@@ -556,47 +534,43 @@ const translations = {
     "footer.copy":"© 2026 Okaerinasai. Lisboa, Portugal."
   },
   en: {
-    "nav.services":"Services","nav.process":"Process","nav.about":"About","nav.faq":"FAQ","nav.contact":"Contact",
-    "hero.h1":"Empowering business growth by bridging Asia and Europe.",
-    "hero.lead":"We help companies scale, expand internationally, and forge strong cross-border partnerships between Asian markets and Portugal.",
+    "nav.services":"Services","nav.process":"Process","nav.about":"About","nav.contact":"Contact",
+    "sub.portugal":"Welcome to Portugal",
+    "sub.japan":"Welcome to Japan",
+    "sub.creators":"Creators",
+    "hero.h1":"Empowering business growth by bridging Portugal and Japan.",
+    "hero.lead":"We help companies scale, expand internationally, and forge strong cross-border partnerships between Japanese markets and Portugal.",
     "hero.ctaPrimary":"Book a consultation","hero.ctaGhost":"Explore our services",
     "about.kicker":"The Cross-Border Advantage","about.h2":"Building strong relationships across two dynamic worlds.",
-    "about.p":"True business expansion relies on trust, local expertise, and meaningful relationships. Based in Lisbon with deep ties across Asian markets, we serve as your strategic partner for international growth, market entry, and bilateral collaboration.",
-    "fact1.label":"Strategic bridge connecting Asian and European enterprises",
+    "about.p":"Based in Lisbon and with colleagues set in Japan, we serve as your strategic partner for international growth, market entry, and bilateral collaboration.",
+    "fact1.label":"Strategic bridge connecting Portuguese and Japanese enterprises",
     "fact2.label":"Gateway to European markets anchored in Portugal",
     "fact3.label":"Bilingual management, legal, and operational support",
     "services.kicker":"Services","services.h2":"Comprehensive support for international expansion.",
-    "services.p":"Whether you are bringing an Asian business into Europe or expanding a European enterprise into Asia, our bilingual team and licensed partners guide every stage.",
-    "package1.title":"Market Feasibility &amp; Strategy","package1.tagline":"Evaluate opportunities and build a solid roadmap before entering a new market.",
-    "package1.li1":"Bilateral market viability assessment",
-    "package1.li2":"Strategic business planning and roadmap design",
-    "package1.li3":"Regulatory and compliance overview",
+    "services.p":"Whether you are expanding a Japanese venture into Portugal or introducing a Portuguese business to Japan, our dedicated team guides every stage.",
+    "package1.title":"Portuguese Market Feasibility &amp; Strategy","package1.tagline":"Evaluate opportunities and build a compliant roadmap together with our licensed legal and accounting partners.",
+    "package1.li1":"Market viability and commercial assessment in Portugal",
+    "package1.li2":"Legal, visa, and regulatory structure alignment",
+    "package1.li3":"Strategic business planning for European entry",
     "package1.li4":"One-on-one expert consultation",
-    "package2.title":"Cross-Border Partnership &amp; Setup","package2.tagline":"Establish your corporate entity and forge powerful relationships with local partners.",
-    "package2.li1":"Company incorporation and corporate setup support",
-    "package2.li2":"Strategic partner matching and network introductions",
-    "package2.li3":"Bilingual contract negotiation and coordination",
-    "package2.li4":"Legal and accounting setup with licensed local partners",
-    "package2.li5":"Full guidance through administrative milestones",
-    "package3.title":"Ongoing Growth &amp; Management","package3.tagline":"Sustain your expansion with continuous operational support and relationship management.",
+    "package2.title":"Cross-Border Creator &amp; Influencer Program","package2.tagline":"Expand your international brand reach through strategic partnerships with top content creators and influencers.",
+    "package2.li1":"Targeted matching with influential digital creators",
+    "package2.li2":"Cross-cultural brand campaign strategy",
+    "package2.li3":"Bilingual contract coordination and deal management",
+    "package2.li4":"Localized social media audience growth",
+    "package3.title":"Ongoing Growth &amp; Management","package3.tagline":"Sustain your international expansion with continuous operational support and relationship management.",
     "package3.li1":"Dedicated relationship manager for daily operations",
-    "package3.li2":"Ongoing cross-border communication and coordination",
-    "package3.li3":"Bookkeeping and tax advisory synchronization",
-    "package3.li4":"Regular strategic performance reviews",
-    "package3.li5":"Expansion scaling and brand scaling support",
+    "package3.li2":"Ongoing cross-border communication between Portugal and Japan",
+    "package3.li3":"Strategic performance reviews and market adaptation",
+    "package3.li4":"Brand expansion and scaling support",
     "process.kicker":"How it works","process.h2":"A clear, transparent path to global growth.",
-    "p1.title":"Discovery.","p1.text":"An initial consultation to understand your business goals and target markets.",
-    "p2.title":"Strategy &amp; Connection.","p2.text":"We design your expansion roadmap and connect you with the right partners.",
-    "p3.title":"Execution &amp; Scale.","p3.text":"We handle the implementation and support your ongoing business growth.",
-    "team.kicker":"Who's behind this","team.h2":"Rooted in Portugal, connected across Asia.",
-    "team.text":"Okaerinasai is operated by an experienced team based in Lisbon with deep connections in Japan and broader Asian markets. We work closely with licensed legal, tax, and corporate partners to ensure every business venture is legally sound, culturally aligned, and built for long-term success.",
-    "faq.kicker":"Questions","faq.h2":"Everything you need to know to get started.",
-    "faq1.q":"What kind of businesses do you work with?","faq1.a":"We work with entrepreneurs, SMEs, creators, and established corporations looking to expand or establish operations between Asian markets and Portugal/Europe.",
-    "faq2.q":"How do you help build relationships between Asia and Europe?","faq2.a":"We bridge language, cultural, and regulatory barriers by acting as your dedicated local liaison, negotiating on your behalf, and introducing vetted strategic partners.",
-    "faq3.q":"Do you handle legal and tax matters directly?","faq3.a":"We coordinate the practical process and strategy. Formal legal representation, visa filings, and tax advisory services are provided directly by our licensed partner attorneys and accountants.",
-    "faq4.q":"How long does an international expansion project take?","faq4.a":"Timelines vary based on scope—ranging from a few weeks for feasibility studies and partner matching to several months for full corporate setups and visa processing.",
+    "p1.title":"Discovery.","p1.text":"An initial consultation to understand your business goals across Portugal and Japan.",
+    "p2.title":"Strategy &amp; Connection.","p2.text":"We design your expansion roadmap and connect you with local partners or creators.",
+    "p3.title":"Execution &amp; Scale.","p3.text":"We handle the coordination and support your ongoing business growth.",
+    "team.kicker":"Who's behind this","team.h2":"Rooted in Portugal, connected in Japan.",
+    "team.text":"Okaerinasai.eu is operated by an experienced team based in Lisbon with strong connections in Japan. We help businesses and creators to expand and amplify the Portugal - Japan relationship.",
     "contact.kicker":"Get started","contact.h2":"Book your free consultation.",
-    "contact.p":"Tell us about your business and your international expansion goals. We'll reply within two business days.",
+    "contact.p":"Tell us about your business and your goals between Portugal and Japan. We'll reply within two business days.",
     "label.name":"Name / Company Name","label.email":"Email","label.business":"What is your business focus or project?","label.timeline":"What is your target timeline?",
     "opt1":"Within 6 months","opt2":"6–12 months","opt3":"Just exploring","label.message":"Anything else we should know?","btn.submit":"Request a consultation",
     "label.consent":"Information you submit is used only to respond to your enquiry and is processed in accordance with EU GDPR",
